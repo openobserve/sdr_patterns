@@ -2805,5 +2805,105 @@
          ],
          "Invalid": []
       }
+   },
+   {
+      "Name": "ISO8601 Timestamp with Milliseconds and Z",
+      "Regex": "^(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z)$",
+      "plural_name": false,
+      "Description": "ISO8601 timestamp format with milliseconds and Zulu timezone (e.g., 2025-01-15T10:30:45.123Z)",
+      "Rarity": 0,
+      "URL": null,
+      "Tags": [
+         "Timestamp",
+         "ISO8601",
+         "Date"
+      ],
+      "Examples": {
+         "Valid": [
+            "2025-01-15T10:30:45.123Z",
+            "2024-12-31T23:59:59.999Z"
+         ],
+         "Invalid": []
+      }
+   },
+   {
+      "Name": "ISO8601 Timestamp with Z",
+      "Regex": "^(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z)$",
+      "plural_name": false,
+      "Description": "ISO8601 timestamp format with Zulu timezone (e.g., 2025-01-15T10:30:45Z)",
+      "Rarity": 0,
+      "URL": null,
+      "Tags": [
+         "Timestamp",
+         "ISO8601",
+         "Date"
+      ],
+      "Examples": {
+         "Valid": [
+            "2025-01-15T10:30:45Z",
+            "2024-12-31T23:59:59Z"
+         ],
+         "Invalid": []
+      }
+   },
+   {
+      "Name": "ISO8601 Timestamp with Timezone Offset",
+      "Regex": "^(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2})$",
+      "plural_name": false,
+      "Description": "ISO8601 timestamp format with timezone offset (e.g., 2025-01-15T10:30:45+00:00)",
+      "Rarity": 0,
+      "URL": null,
+      "Tags": [
+         "Timestamp",
+         "ISO8601",
+         "Date"
+      ],
+      "Examples": {
+         "Valid": [
+            "2025-01-15T10:30:45+00:00",
+            "2024-12-31T23:59:59-05:00",
+            "2025-06-15T14:20:30+09:00"
+         ],
+         "Invalid": []
+      }
+   },
+   {
+      "Name": "ISO8601 Timestamp with Milliseconds and Timezone Offset",
+      "Regex": "^(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}[+-]\\d{2}:\\d{2})$",
+      "plural_name": false,
+      "Description": "ISO8601 timestamp format with milliseconds and timezone offset (e.g., 2025-01-15T10:30:45.123+00:00)",
+      "Rarity": 0,
+      "URL": null,
+      "Tags": [
+         "Timestamp",
+         "ISO8601",
+         "Date"
+      ],
+      "Examples": {
+         "Valid": [
+            "2025-01-15T10:30:45.123+00:00",
+            "2024-12-31T23:59:59.999-05:00"
+         ],
+         "Invalid": []
+      }
+   },
+   {
+      "Name": "ISO8601 Date",
+      "Regex": "^(\\d{4}-\\d{2}-\\d{2})$",
+      "plural_name": false,
+      "Description": "ISO8601 date format (e.g., 2025-01-15)",
+      "Rarity": 0,
+      "URL": null,
+      "Tags": [
+         "Date",
+         "ISO8601"
+      ],
+      "Examples": {
+         "Valid": [
+            "2025-01-15",
+            "2024-12-31"
+         ],
+         "Invalid": []
+      }
    }
 ]
