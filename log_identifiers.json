@@ -1,0 +1,55 @@
+[
+  {
+    "Name": "UUID",
+    "Regex": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
+    "Rarity": 1,
+    "Tags": ["UUID", "Log Identifiers"],
+    "Description": "Universally Unique Identifier (UUID/GUID). Appears frequently in distributed system logs as request IDs, trace IDs, entity IDs, etc. Masking prevents UUID variance from splitting log clusters.",
+    "Examples": {
+      "Valid": [
+        "f91302e6-4f5d-4d50-89cf-18377f751c82",
+        "550e8400-e29b-41d4-a716-446655440000"
+      ],
+      "Invalid": [
+        "not-a-uuid",
+        "12345678"
+      ]
+    }
+  },
+  {
+    "Name": "Unix Timestamp",
+    "Regex": "\\b\\d{10}(?:\\d{3}(?:\\d{3})?)?\\b",
+    "Rarity": 1,
+    "Tags": ["Timestamp", "Unix Timestamp", "Log Identifiers"],
+    "Description": "Unix epoch timestamps in seconds (10 digits), milliseconds (13 digits), or microseconds (16 digits). Common in logs as event times, TTLs, and expiry values. May false-positive on other standalone 10-digit integers.",
+    "Examples": {
+      "Valid": [
+        "1704067200",
+        "1704067200000",
+        "1704067200000000"
+      ],
+      "Invalid": [
+        "12345",
+        "2025-01-01"
+      ]
+    }
+  },
+  {
+    "Name": "IPv4 Address",
+    "Regex": "\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b",
+    "Rarity": 1,
+    "Tags": ["IPv4", "IP Address", "Log Identifiers"],
+    "Description": "IPv4 address in dotted-decimal notation. Ubiquitous in network, access, and application logs. Masking prevents per-IP cluster fragmentation.",
+    "Examples": {
+      "Valid": [
+        "192.168.1.100",
+        "10.0.0.1",
+        "172.16.254.1"
+      ],
+      "Invalid": [
+        "999.999.999.999",
+        "not.an.ip"
+      ]
+    }
+  }
+]
