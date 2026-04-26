@@ -970,5 +970,207 @@
         }
       }
     ]
+  },
+  {
+    "name": "DeepSeek V4 Flash",
+    "provider": "DeepSeek",
+    "description": "DeepSeek V4 Flash — 1M context",
+    "match_pattern": "(?i)deepseek-v4-flash",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 1.4e-07,
+          "output": 2.8e-07,
+          "cache_read_input_tokens": 2.8e-09
+        }
+      }
+    ]
+  },
+  {
+    "name": "DeepSeek V4 Pro",
+    "provider": "DeepSeek",
+    "description": "DeepSeek V4 Pro — 1M context",
+    "match_pattern": "(?i)deepseek-v4-pro",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 1.74e-06,
+          "output": 3.48e-06,
+          "cache_read_input_tokens": 1.45e-08
+        }
+      }
+    ]
+  },
+  {
+    "name": "DeepSeek V3",
+    "provider": "DeepSeek",
+    "description": "DeepSeek V3 (deepseek-chat)",
+    "match_pattern": "(?i)deepseek-(?:v3|chat)(?:$|-)",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 2.7e-07,
+          "output": 1.1e-06,
+          "cache_read_input_tokens": 7e-08
+        }
+      }
+    ]
+  },
+  {
+    "name": "DeepSeek R1",
+    "provider": "DeepSeek",
+    "description": "DeepSeek R1 reasoning model (deepseek-reasoner)",
+    "match_pattern": "(?i)deepseek-(?:r1|reasoner)(?:-\\d[\\d-]*)?$",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 5.5e-07,
+          "output": 2.19e-06,
+          "cache_read_input_tokens": 1.4e-07
+        }
+      }
+    ]
+  },
+  {
+    "name": "DeepSeek R1 Distill Llama 8B",
+    "provider": "DeepSeek",
+    "description": "DeepSeek R1 distilled on Llama 8B",
+    "match_pattern": "(?i)deepseek-r1-distill-llama-8b",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 4e-08,
+          "output": 4e-08
+        }
+      }
+    ]
+  },
+  {
+    "name": "DeepSeek R1 Distill Qwen 32B",
+    "provider": "DeepSeek",
+    "description": "DeepSeek R1 distilled on Qwen 32B",
+    "match_pattern": "(?i)deepseek-r1-distill-qwen-32b",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 2.9e-07,
+          "output": 2.9e-07
+        }
+      }
+    ]
+  },
+  {
+    "name": "Kimi K2.6",
+    "provider": "Moonshot",
+    "description": "Kimi K2.6 multimodal model",
+    "match_pattern": "(?i)kimi-k2\\.6",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 7.448e-07,
+          "output": 4.655e-06
+        }
+      }
+    ]
+  },
+  {
+    "name": "Kimi K2.5",
+    "provider": "Moonshot",
+    "description": "Kimi K2.5 multimodal model",
+    "match_pattern": "(?i)kimi-k2\\.5",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 6e-07,
+          "output": 2.5e-06,
+          "cache_read_input_tokens": 1.5e-07
+        }
+      }
+    ]
+  },
+  {
+    "name": "Kimi K2 Turbo",
+    "provider": "Moonshot",
+    "description": "Kimi K2 Turbo / Thinking Turbo variants",
+    "match_pattern": "(?i)kimi-k2-(?:turbo|thinking-turbo)",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 1.15e-06,
+          "output": 8e-06,
+          "cache_read_input_tokens": 1.5e-07
+        }
+      }
+    ]
+  },
+  {
+    "name": "Kimi K2",
+    "provider": "Moonshot",
+    "description": "Kimi K2 generation model (0711, 0905, thinking variants)",
+    "match_pattern": "(?i)kimi-k2(?:-(?:0711|0905|thinking))?(?:-preview)?$",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 6e-07,
+          "output": 2.5e-06,
+          "cache_read_input_tokens": 1.5e-07
+        }
+      }
+    ]
+  },
+  {
+    "name": "Moonshot V1 128k",
+    "provider": "Moonshot",
+    "description": "Moonshot V1 classic model — 128k context",
+    "match_pattern": "(?i)moonshot-v1-128k",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 2e-06,
+          "output": 5e-06
+        }
+      }
+    ]
+  },
+  {
+    "name": "Moonshot V1 32k",
+    "provider": "Moonshot",
+    "description": "Moonshot V1 classic model — 32k context",
+    "match_pattern": "(?i)moonshot-v1-32k",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 1e-06,
+          "output": 3e-06
+        }
+      }
+    ]
+  },
+  {
+    "name": "Moonshot V1 8k",
+    "provider": "Moonshot",
+    "description": "Moonshot V1 classic model — 8k context",
+    "match_pattern": "(?i)moonshot-v1-8k",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 2e-07,
+          "output": 2e-06
+        }
+      }
+    ]
   }
 ]
