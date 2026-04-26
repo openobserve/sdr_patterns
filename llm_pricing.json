@@ -24,7 +24,8 @@
         "name": "Default",
         "prices": {
           "input": 1.75e-06,
-          "output": 1.4e-05
+          "output": 1.4e-05,
+          "cache_read_input_tokens": 1.75e-07
         }
       }
     ]
@@ -39,7 +40,8 @@
         "name": "Default",
         "prices": {
           "input": 1.25e-06,
-          "output": 1e-05
+          "output": 1e-05,
+          "cache_read_input_tokens": 1.25e-07
         }
       }
     ]
@@ -70,7 +72,7 @@
         "prices": {
           "input": 2.5e-07,
           "output": 2e-06,
-          "cache_read_input_tokens": 1.25e-07
+          "cache_read_input_tokens": 2.5e-08
         }
       }
     ]
@@ -85,7 +87,8 @@
         "name": "Default",
         "prices": {
           "input": 5e-08,
-          "output": 4e-07
+          "output": 4e-07,
+          "cache_read_input_tokens": 5e-09
         }
       }
     ]
@@ -101,7 +104,39 @@
         "prices": {
           "input": 1.25e-06,
           "output": 1e-05,
-          "cache_read_input_tokens": 6.25e-07
+          "cache_read_input_tokens": 1.25e-07
+        }
+      }
+    ]
+  },
+  {
+    "name": "GPT-4.5 Preview",
+    "provider": "OpenAI",
+    "description": "OpenAI GPT-4.5 Preview",
+    "match_pattern": "(?i)gpt-4\\.5",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 7.5e-05,
+          "output": 1.5e-04,
+          "cache_read_input_tokens": 3.75e-05
+        }
+      }
+    ]
+  },
+  {
+    "name": "GPT-4.1 Nano",
+    "provider": "OpenAI",
+    "description": "OpenAI GPT-4.1 Nano",
+    "match_pattern": "(?i)gpt-4\\.1-nano",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 1e-07,
+          "output": 4e-07,
+          "cache_read_input_tokens": 2.5e-08
         }
       }
     ]
@@ -117,7 +152,7 @@
         "prices": {
           "input": 4e-07,
           "output": 1.6e-06,
-          "cache_read_input_tokens": 2e-07
+          "cache_read_input_tokens": 1e-07
         }
       }
     ]
@@ -133,7 +168,7 @@
         "prices": {
           "input": 2e-06,
           "output": 8e-06,
-          "cache_read_input_tokens": 1e-06
+          "cache_read_input_tokens": 5e-07
         }
       }
     ]
@@ -187,10 +222,26 @@
     ]
   },
   {
+    "name": "o1 Mini",
+    "provider": "OpenAI",
+    "description": "OpenAI o1 Mini",
+    "match_pattern": "(?i)o1-mini",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 1.1e-06,
+          "output": 4.4e-06,
+          "cache_read_input_tokens": 5.5e-07
+        }
+      }
+    ]
+  },
+  {
     "name": "o1",
     "provider": "OpenAI",
     "description": "OpenAI o1",
-    "match_pattern": "(?i)(?:^|[-/])o1(?:$|[-/])",
+    "match_pattern": "(?i)(?:^|[-/])o1(?:$|[-/]\\d)",
     "tiers": [
       {
         "name": "Default",
@@ -238,14 +289,14 @@
     "name": "o3",
     "provider": "OpenAI",
     "description": "OpenAI o3",
-    "match_pattern": "(?i)(?:^|[-/])o3(?:$|[-/])",
+    "match_pattern": "(?i)(?:^|[-/])o3(?:$|[-/]\\d)",
     "tiers": [
       {
         "name": "Default",
         "prices": {
-          "input": 2e-06,
-          "output": 8e-06,
-          "cache_read_input_tokens": 1e-06
+          "input": 1e-05,
+          "output": 4e-05,
+          "cache_read_input_tokens": 5e-07
         }
       }
     ]
@@ -261,7 +312,7 @@
         "prices": {
           "input": 1.1e-06,
           "output": 4.4e-06,
-          "cache_read_input_tokens": 5.5e-07
+          "cache_read_input_tokens": 2.75e-07
         }
       }
     ]
@@ -400,6 +451,74 @@
     ]
   },
   {
+    "name": "Claude Opus 4.7",
+    "provider": "Anthropic",
+    "description": "Anthropic Claude Opus 4.7 \u2014 1M context window",
+    "match_pattern": "(?i)claude-opus-4-7",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 5e-06,
+          "output": 2.5e-05,
+          "cache_read_input_tokens": 5e-07,
+          "cache_creation_input_tokens": 6.25e-06
+        }
+      }
+    ]
+  },
+  {
+    "name": "Claude Opus 4.5",
+    "provider": "Anthropic",
+    "description": "Anthropic Claude Opus 4.5",
+    "match_pattern": "(?i)claude-opus-4-5",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 5e-06,
+          "output": 2.5e-05,
+          "cache_read_input_tokens": 5e-07,
+          "cache_creation_input_tokens": 6.25e-06
+        }
+      }
+    ]
+  },
+  {
+    "name": "Claude Opus 4.1",
+    "provider": "Anthropic",
+    "description": "Anthropic Claude Opus 4.1",
+    "match_pattern": "(?i)claude-opus-4-1",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 1.5e-05,
+          "output": 7.5e-05,
+          "cache_read_input_tokens": 1.5e-06,
+          "cache_creation_input_tokens": 1.875e-05
+        }
+      }
+    ]
+  },
+  {
+    "name": "Claude Opus 4",
+    "provider": "Anthropic",
+    "description": "Anthropic Claude Opus 4",
+    "match_pattern": "(?i)claude-opus-4$",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 1.5e-05,
+          "output": 7.5e-05,
+          "cache_read_input_tokens": 1.5e-06,
+          "cache_creation_input_tokens": 1.875e-05
+        }
+      }
+    ]
+  },
+  {
     "name": "Claude Sonnet 4.6",
     "provider": "Anthropic",
     "description": "Anthropic Claude Sonnet 4.6 \u2014 extended context pricing at 200k+ input tokens",
@@ -433,7 +552,7 @@
   {
     "name": "Claude Sonnet 4.5",
     "provider": "Anthropic",
-    "description": "Anthropic Claude Sonnet 4.5",
+    "description": "Anthropic Claude Sonnet 4.5 \u2014 extended context pricing at 200k+ input tokens",
     "match_pattern": "(?i)claude-sonnet-4-5",
     "tiers": [
       {
@@ -488,57 +607,6 @@
           "output": 1.5e-05,
           "cache_read_input_tokens": 3e-07,
           "cache_creation_input_tokens": 3.75e-06
-        }
-      }
-    ]
-  },
-  {
-    "name": "Claude Opus 4.5",
-    "provider": "Anthropic",
-    "description": "Anthropic Claude Opus 4.5",
-    "match_pattern": "(?i)claude-opus-4-5",
-    "tiers": [
-      {
-        "name": "Default",
-        "prices": {
-          "input": 5e-06,
-          "output": 2.5e-05,
-          "cache_read_input_tokens": 5e-07,
-          "cache_creation_input_tokens": 6.25e-06
-        }
-      }
-    ]
-  },
-  {
-    "name": "Claude Haiku 4.5",
-    "provider": "Anthropic",
-    "description": "Anthropic Claude Haiku 4.5",
-    "match_pattern": "(?i)claude-haiku-4-5",
-    "tiers": [
-      {
-        "name": "Default",
-        "prices": {
-          "input": 1e-06,
-          "output": 5e-06,
-          "cache_read_input_tokens": 1e-07,
-          "cache_creation_input_tokens": 1.25e-06
-        }
-      }
-    ]
-  },
-  {
-    "name": "Claude Opus 4",
-    "provider": "Anthropic",
-    "description": "Anthropic Claude Opus 4",
-    "match_pattern": "(?i)claude-opus-4$",
-    "tiers": [
-      {
-        "name": "Default",
-        "prices": {
-          "input": 1.5e-05,
-          "output": 7.5e-05,
-          "cache_read_input_tokens": 1.5e-06,
-          "cache_creation_input_tokens": 1.875e-05
         }
       }
     ]
@@ -612,6 +680,23 @@
     ]
   },
   {
+    "name": "Claude Haiku 4.5",
+    "provider": "Anthropic",
+    "description": "Anthropic Claude Haiku 4.5",
+    "match_pattern": "(?i)claude-haiku-4-5",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 1e-06,
+          "output": 5e-06,
+          "cache_read_input_tokens": 1e-07,
+          "cache_creation_input_tokens": 1.25e-06
+        }
+      }
+    ]
+  },
+  {
     "name": "Claude 3.5 Haiku",
     "provider": "Anthropic",
     "description": "Anthropic Claude 3.5 Haiku",
@@ -660,14 +745,16 @@
         },
         "prices": {
           "input": 4e-06,
-          "output": 1.8e-05
+          "output": 1.8e-05,
+          "cache_read_input_tokens": 4e-07
         }
       },
       {
         "name": "Default",
         "prices": {
           "input": 2e-06,
-          "output": 1.2e-05
+          "output": 1.2e-05,
+          "cache_read_input_tokens": 2e-07
         }
       }
     ]
@@ -682,7 +769,8 @@
         "name": "Default",
         "prices": {
           "input": 2.5e-07,
-          "output": 1.5e-06
+          "output": 1.5e-06,
+          "cache_read_input_tokens": 2.5e-08
         }
       }
     ]
@@ -697,7 +785,8 @@
         "name": "Default",
         "prices": {
           "input": 5e-07,
-          "output": 3e-06
+          "output": 3e-06,
+          "cache_read_input_tokens": 5e-08
         }
       }
     ]
@@ -717,14 +806,16 @@
         },
         "prices": {
           "input": 2.5e-06,
-          "output": 1.5e-05
+          "output": 1.5e-05,
+          "cache_read_input_tokens": 2.5e-07
         }
       },
       {
         "name": "Default",
         "prices": {
           "input": 1.25e-06,
-          "output": 1e-05
+          "output": 1e-05,
+          "cache_read_input_tokens": 1.25e-07
         }
       }
     ]
@@ -739,7 +830,8 @@
         "name": "Default",
         "prices": {
           "input": 1e-07,
-          "output": 4e-07
+          "output": 4e-07,
+          "cache_read_input_tokens": 1e-08
         }
       }
     ]
@@ -754,7 +846,8 @@
         "name": "Default",
         "prices": {
           "input": 3e-07,
-          "output": 2.5e-06
+          "output": 2.5e-06,
+          "cache_read_input_tokens": 3e-08
         }
       }
     ]
@@ -784,7 +877,37 @@
         "name": "Default",
         "prices": {
           "input": 1e-07,
-          "output": 4e-07
+          "output": 4e-07,
+          "cache_read_input_tokens": 2.5e-08
+        }
+      }
+    ]
+  },
+  {
+    "name": "Gemini 1.5 Flash 8B",
+    "provider": "Google",
+    "description": "Google Gemini 1.5 Flash 8B \u2014 extended context pricing at 128k+ input tokens",
+    "match_pattern": "(?i)gemini-(?:flash-1\\.5-8b|1\\.5-flash-8b)",
+    "tiers": [
+      {
+        "name": "Extended Context (128k+)",
+        "condition": {
+          "usage_key": "input",
+          "operator": "gte",
+          "value": 128000
+        },
+        "prices": {
+          "input": 7.5e-08,
+          "output": 3e-07,
+          "cache_read_input_tokens": 2e-08
+        }
+      },
+      {
+        "name": "Default",
+        "prices": {
+          "input": 3.75e-08,
+          "output": 1.5e-07,
+          "cache_read_input_tokens": 1e-08
         }
       }
     ]
