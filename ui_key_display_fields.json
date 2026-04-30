@@ -1,0 +1,14 @@
+{
+  "traces": {
+    "fields": ["duration", "_timestamp", "trace_id", "span_id", "parent_span_id"],
+    "groups": ["http", "service", "host", "db", "error"]
+  },
+  "logs": {
+    "fields": ["_timestamp", "level", "severity", "message", "msg", "body"],
+    "groups": ["service", "host", "error"]
+  },
+  "metrics": {
+    "fields": ["_timestamp", "__name__", "value", "le", "quantile"],
+    "groups": ["service", "host", "k8s"]
+  }
+}
