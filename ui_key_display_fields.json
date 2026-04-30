@@ -66,8 +66,8 @@
   },
   "key_fields": {
     "traces": {
-      "fields": ["duration", "_timestamp", "trace_id", "span_id", "parent_span_id"],
-      "groups": ["http", "service", "host", "db", "error"]
+      "fields": ["duration", "_timestamp","operation_name", "trace_id", "span_id", "parent_span_id"],
+      "groups": ["service", "environment" ,"http-status"]
     },
     "logs": {
       "fields": ["_timestamp", "level", "severity", "message", "msg", "body"],
