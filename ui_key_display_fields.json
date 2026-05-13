@@ -70,7 +70,7 @@
       "groups": ["service", "environment" ,"http-status"]
     },
     "logs": {
-      "fields": ["_timestamp", "level", "severity", "message", "msg", "body"],
+      "fields": ["_timestamp", "stream_name", "level", "severity", "message", "msg", "body"],
       "groups": ["service", "host", "error"]
     },
     "metrics": {
