@@ -67,7 +67,20 @@
   "key_fields": {
     "traces": {
       "fields": ["duration", "_timestamp","operation_name", "trace_id", "span_id", "parent_span_id"],
-      "groups": ["service", "environment" ,"http-status"]
+      "groups": ["service", "environment" ,"http-status"],
+      "service_detection": {
+        "server_kinds": ["SERVER", "INTERNAL", "UNSPECIFIED"],
+        "rules": [
+            {
+                "attributes": ["db_system", "db_system_name"],
+                "sub_attributes": ["db_name", "db_system_name", "db_system"]
+            },
+            {
+                "attributes": ["messaging_system", "messaging_destination_name"],
+                "sub_attributes": ["messaging_destination_name", "messaging_system"]
+            }
+        ]
+      }
     },
     "logs": {
       "fields": ["_timestamp", "stream_name", "level", "severity", "message", "msg", "body"],
