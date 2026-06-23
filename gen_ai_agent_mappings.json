@@ -1,0 +1,14 @@
+{
+  "agent_name_fields": [
+    "agent.name",
+    "agent_name",
+    "llm.agent.name",
+    "llm.agent_name"
+  ],
+  "agent_id_fields": [
+    "agent.id",
+    "agent_id",
+    "llm.agent.id",
+    "llm.agent_id"
+  ]
+}
