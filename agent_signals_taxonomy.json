@@ -1,0 +1,23 @@
+{
+  "error_detail_fields": [
+    "status_message",
+    "error_message",
+    "error_type",
+    "exception_message",
+    "exception_type"
+  ],
+  "failure_rules": [
+    { "class": "wrong_tool_call",         "patterns": ["not found.%Available tools"] },
+    { "class": "malformed_tool_call",     "patterns": ["Invalid arguments", "missing field"] },
+    { "class": "context_window_exceeded", "patterns": ["ContextWindowExceeded", "prompt is too long", "request_too_large", "maximum size"] },
+    { "class": "validation_error",        "patterns": ["Validation failed", "ValidationError", "Search field not found", "No field named", "Error 400", "Error 422"] },
+    { "class": "rate_limited",            "patterns": ["RateLimit", "rate_limit", "429", "query was cancelled", "request canceled"] },
+    { "class": "auth_error",              "patterns": ["Unauthorized", "401", "403 ", "Forbidden", "permission denied", "AuthenticationError", "authentication_error", "invalid x-api-key", "invalid api key"] },
+    { "class": "not_found",               "patterns": ["Error 404", "404:", "not found", "does not exist"] },
+    { "class": "tool_timeout",            "patterns": ["timeout", "timed out"] },
+    { "class": "incomplete_response",     "patterns": ["stream ended without response", "empty response", "no response returned"] },
+    { "class": "mcp_error",               "patterns": ["McpError"] },
+    { "class": "provider_error",          "patterns": ["BadRequestError", "litellm.", "AnthropicException", "APIError", "Error 5"] },
+    { "class": "tool_error",              "patterns": ["tool error", "Tool returned error", "Tool execution failed"] }
+  ]
+}
