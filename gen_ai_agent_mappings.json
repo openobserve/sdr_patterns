@@ -12,9 +12,14 @@
     "llm.agent_id"
   ],
   "env_fields": [
-    "deployment.environment"
+    "deployment.environment",
+    "env",
+    "environment",
+    "k8s.namespace.name"
   ],
   "version_fields": [
-    "service.version"
+    "service.version",
+    "app.version",
+    "git.commit.sha"
   ]
 }
