@@ -1,9 +1,9 @@
 {
   "agent_name_fields": [
     "agent.name",
-    "agent_name",
     "llm.agent.name",
-    "llm.agent_name"
+    "gcp.vertex.agent.name",
+    "crewai.task.agent"
   ],
   "agent_id_fields": [
     "agent.id",
@@ -11,6 +11,10 @@
     "llm.agent.id",
     "llm.agent_id"
   ],
-  "env_fields": [],
-  "version_fields": []
+  "env_fields": [
+    "deployment.environment"
+  ],
+  "version_fields": [
+    "service.version"
+  ]
 }
