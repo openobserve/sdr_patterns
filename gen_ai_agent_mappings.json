@@ -1,14 +1,25 @@
 {
   "agent_name_fields": [
     "agent.name",
-    "agent_name",
     "llm.agent.name",
-    "llm.agent_name"
+    "gcp.vertex.agent.name",
+    "crewai.task.agent"
   ],
   "agent_id_fields": [
     "agent.id",
     "agent_id",
     "llm.agent.id",
     "llm.agent_id"
+  ],
+  "env_fields": [
+    "deployment.environment",
+    "env",
+    "environment",
+    "k8s.namespace.name"
+  ],
+  "version_fields": [
+    "service.version",
+    "app.version",
+    "git.commit.sha"
   ]
 }
