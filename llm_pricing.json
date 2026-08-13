@@ -44,19 +44,19 @@
           "value": 272000
         },
         "prices": {
-          "input": 5e-06,
-          "output": 2.25e-05,
-          "cache_read_input_tokens": 5e-07,
-          "cache_creation_input_tokens": 6.25e-06
+          "input": 4e-06,
+          "output": 1.8e-05,
+          "cache_read_input_tokens": 4e-07,
+          "cache_creation_input_tokens": 5e-06
         }
       },
       {
         "name": "Default",
         "prices": {
-          "input": 2.5e-06,
-          "output": 1.5e-05,
-          "cache_read_input_tokens": 2.5e-07,
-          "cache_creation_input_tokens": 3.125e-06
+          "input": 2e-06,
+          "output": 1.2e-05,
+          "cache_read_input_tokens": 2e-07,
+          "cache_creation_input_tokens": 2.5e-06
         }
       }
     ]
@@ -75,19 +75,19 @@
           "value": 272000
         },
         "prices": {
-          "input": 2e-06,
-          "output": 9e-06,
-          "cache_read_input_tokens": 2e-07,
-          "cache_creation_input_tokens": 2.5e-06
+          "input": 4e-07,
+          "output": 1.8e-06,
+          "cache_read_input_tokens": 4e-08,
+          "cache_creation_input_tokens": 5e-07
         }
       },
       {
         "name": "Default",
         "prices": {
-          "input": 1e-06,
-          "output": 6e-06,
-          "cache_read_input_tokens": 1e-07,
-          "cache_creation_input_tokens": 1.25e-06
+          "input": 2e-07,
+          "output": 1.2e-06,
+          "cache_read_input_tokens": 2e-08,
+          "cache_creation_input_tokens": 2.5e-07
         }
       }
     ]
@@ -393,6 +393,21 @@
     ]
   },
   {
+    "name": "ChatGPT-4o Latest",
+    "provider": "OpenAI",
+    "description": "OpenAI chatgpt-4o-latest - ChatGPT-tuned GPT-4o, priced above the API gpt-4o",
+    "match_pattern": "(?i)chatgpt-4o-latest",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 5e-06,
+          "output": 1.5e-05
+        }
+      }
+    ]
+  },
+  {
     "name": "GPT-4o",
     "provider": "OpenAI",
     "description": "OpenAI GPT-4o",
@@ -634,6 +649,40 @@
         "name": "Default",
         "prices": {
           "input": 1e-07
+        }
+      }
+    ]
+  },
+  {
+    "name": "Claude Opus 5",
+    "provider": "Anthropic",
+    "description": "Anthropic Claude Opus 5 \u2014 1M context window, no long-context premium",
+    "match_pattern": "(?i)claude-opus-5",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 5e-06,
+          "output": 2.5e-05,
+          "cache_read_input_tokens": 5e-07,
+          "cache_creation_input_tokens": 6.25e-06
+        }
+      }
+    ]
+  },
+  {
+    "name": "Claude Sonnet 5",
+    "provider": "Anthropic",
+    "description": "Anthropic Claude Sonnet 5 \u2014 1M context window, no long-context premium. Introductory pricing ($2/$10 per MTok) through 2026-08-31; reverts to $3/$15 after",
+    "match_pattern": "(?i)claude-sonnet-5",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 2e-06,
+          "output": 1e-05,
+          "cache_read_input_tokens": 2e-07,
+          "cache_creation_input_tokens": 2.5e-06
         }
       }
     ]
@@ -987,10 +1036,42 @@
     ]
   },
   {
+    "name": "Gemini 3.6 Flash",
+    "provider": "Google",
+    "description": "Google Gemini 3.6 Flash",
+    "match_pattern": "(?i)gemini-3\\.6-flash",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 1.5e-06,
+          "output": 7.5e-06,
+          "cache_read_input_tokens": 1.5e-07
+        }
+      }
+    ]
+  },
+  {
+    "name": "Gemini 3.5 Flash Lite",
+    "provider": "Google",
+    "description": "Google Gemini 3.5 Flash Lite",
+    "match_pattern": "(?i)gemini-3\\.5-flash-lite",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 3e-07,
+          "output": 2.5e-06,
+          "cache_read_input_tokens": 3e-08
+        }
+      }
+    ]
+  },
+  {
     "name": "Gemini 3.5 Flash",
     "provider": "Google",
     "description": "Google Gemini 3.5 Flash",
-    "match_pattern": "(?i)gemini-3\\.5-flash",
+    "match_pattern": "(?i)gemini-3\\.5-flash(?:$|-preview|-latest|-\\d)",
     "tiers": [
       {
         "name": "Default",
@@ -1050,7 +1131,7 @@
   {
     "name": "Gemini 3 Pro",
     "provider": "Google",
-    "description": "Google Gemini 3 Pro — extended context pricing at 200k+ input tokens",
+    "description": "Google Gemini 3 Pro \u2014 extended context pricing at 200k+ input tokens",
     "match_pattern": "(?i)gemini-3-pro",
     "tiers": [
       {
@@ -1124,7 +1205,7 @@
   {
     "name": "Gemini Flash Lite Latest",
     "provider": "Google",
-    "description": "Google Gemini Flash Lite (rolling alias — currently 2.5 Flash Lite pricing)",
+    "description": "Google Gemini Flash Lite (rolling alias \u2014 currently 2.5 Flash Lite pricing)",
     "match_pattern": "(?i)gemini-flash-lite-latest",
     "tiers": [
       {
@@ -1140,7 +1221,7 @@
   {
     "name": "Gemini Flash Latest",
     "provider": "Google",
-    "description": "Google Gemini Flash (rolling alias — currently 2.5 Flash pricing)",
+    "description": "Google Gemini Flash (rolling alias \u2014 currently 2.5 Flash pricing)",
     "match_pattern": "(?i)gemini-flash-latest",
     "tiers": [
       {
@@ -1307,7 +1388,7 @@
   {
     "name": "DeepSeek V4 Flash",
     "provider": "DeepSeek",
-    "description": "DeepSeek V4 Flash — 1M context",
+    "description": "DeepSeek V4 Flash \u2014 1M context",
     "match_pattern": "(?i)deepseek-v4-flash",
     "tiers": [
       {
@@ -1323,7 +1404,7 @@
   {
     "name": "DeepSeek V4 Pro",
     "provider": "DeepSeek",
-    "description": "DeepSeek V4 Pro — 1M context",
+    "description": "DeepSeek V4 Pro \u2014 1M context",
     "match_pattern": "(?i)deepseek-v4-pro",
     "tiers": [
       {
@@ -1481,7 +1562,7 @@
   {
     "name": "Moonshot V1 128k",
     "provider": "Moonshot",
-    "description": "Moonshot V1 classic model — 128k context",
+    "description": "Moonshot V1 classic model \u2014 128k context",
     "match_pattern": "(?i)moonshot-v1-128k",
     "tiers": [
       {
@@ -1496,7 +1577,7 @@
   {
     "name": "Moonshot V1 32k",
     "provider": "Moonshot",
-    "description": "Moonshot V1 classic model — 32k context",
+    "description": "Moonshot V1 classic model \u2014 32k context",
     "match_pattern": "(?i)moonshot-v1-32k",
     "tiers": [
       {
@@ -1511,7 +1592,7 @@
   {
     "name": "Moonshot V1 8k",
     "provider": "Moonshot",
-    "description": "Moonshot V1 classic model — 8k context",
+    "description": "Moonshot V1 classic model \u2014 8k context",
     "match_pattern": "(?i)moonshot-v1-8k",
     "tiers": [
       {
