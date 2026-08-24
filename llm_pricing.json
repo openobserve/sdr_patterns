@@ -1388,15 +1388,33 @@
   {
     "name": "DeepSeek V4 Flash",
     "provider": "DeepSeek",
-    "description": "DeepSeek V4 Flash \u2014 1M context",
+    "description": "DeepSeek V4 Flash \u2014 1M context. Peak hours are 01:00-04:00 and 06:00-10:00 UTC; every other hour is off-peak at half the peak rate.",
     "match_pattern": "(?i)deepseek-v4-flash",
     "tiers": [
       {
-        "name": "Default",
+        "name": "Off-Peak",
         "prices": {
-          "input": 1.4e-07,
-          "output": 2.8e-07,
-          "cache_read_input_tokens": 2.8e-09
+          "input": 2.2e-07,
+          "output": 6.6e-07,
+          "cache_read_input_tokens": 7e-09
+        }
+      },
+      {
+        "name": "Peak (01:00-04:00, 06:00-10:00 UTC)",
+        "utc_windows": [
+          {
+            "start_minute": 60,
+            "end_minute": 240
+          },
+          {
+            "start_minute": 360,
+            "end_minute": 600
+          }
+        ],
+        "prices": {
+          "input": 4.4e-07,
+          "output": 1.32e-06,
+          "cache_read_input_tokens": 1.4e-08
         }
       }
     ]
@@ -1404,15 +1422,33 @@
   {
     "name": "DeepSeek V4 Pro",
     "provider": "DeepSeek",
-    "description": "DeepSeek V4 Pro \u2014 1M context",
+    "description": "DeepSeek V4 Pro \u2014 1M context. Peak hours are 01:00-04:00 and 06:00-10:00 UTC; every other hour is off-peak at half the peak rate.",
     "match_pattern": "(?i)deepseek-v4-pro",
     "tiers": [
       {
-        "name": "Default",
+        "name": "Off-Peak",
         "prices": {
-          "input": 4.35e-07,
-          "output": 8.7e-07,
-          "cache_read_input_tokens": 3.625e-09
+          "input": 6.6e-07,
+          "output": 1.98e-06,
+          "cache_read_input_tokens": 2.2e-08
+        }
+      },
+      {
+        "name": "Peak (01:00-04:00, 06:00-10:00 UTC)",
+        "utc_windows": [
+          {
+            "start_minute": 60,
+            "end_minute": 240
+          },
+          {
+            "start_minute": 360,
+            "end_minute": 600
+          }
+        ],
+        "prices": {
+          "input": 1.32e-06,
+          "output": 3.96e-06,
+          "cache_read_input_tokens": 4.4e-08
         }
       }
     ]
