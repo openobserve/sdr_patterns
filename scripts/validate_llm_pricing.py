@@ -22,21 +22,21 @@ def norm_key(key):
 
 
 def restrictions(tier):
-    """Canonical restriction items; a tier's rank counts them, superset checks compare them."""
-    items = set()
+    """Canonical restriction items, duplicates kept because the backend's rank counts every rule."""
+    items = []
     cond = tier.get("condition")
     if cond:
-        items.add(("cond", cond["usage_key"], cond["operator"], float(cond["value"])))
+        items.append(("cond", cond["usage_key"], cond["operator"], float(cond["value"])))
     windows = tier.get("utc_windows") or []
     if windows:
-        items.add(("win", tuple((w["start_minute"], w["end_minute"]) for w in windows)))
+        items.append(("win", tuple((w["start_minute"], w["end_minute"]) for w in windows)))
     for rule in tier.get("rules") or []:
-        items.add(
+        items.append(
             (
                 "rule",
                 tuple(norm_key(k) for k in rule["keys"]),
                 rule["op"],
-                tuple(sorted(v.strip().lower() for v in rule.get("values", []))),
+                tuple(sorted(str(v).strip().lower() for v in rule.get("values", []))),
                 rule.get("value"),
             )
         )
@@ -76,11 +76,15 @@ def exclusive(a, b):
     for ra in a.get("rules") or []:
         for rb in b.get("rules") or []:
             same_keys = [norm_key(k) for k in ra["keys"]] == [norm_key(k) for k in rb["keys"]]
-            if same_keys and ra["op"] == "in" and rb["op"] == "in":
-                va = {v.strip().lower() for v in ra["values"]}
-                vb = {v.strip().lower() for v in rb["values"]}
-                if not va & vb:
-                    return True
+            if not same_keys or {ra["op"], rb["op"]} - SET_OPS:
+                continue
+            va = {str(v).strip().lower() for v in ra["values"]}
+            vb = {str(v).strip().lower() for v in rb["values"]}
+            ops = (ra["op"], rb["op"])
+            if ops == ("in", "in") and not va & vb:
+                return True
+            if (ops == ("in", "not_in") and va <= vb) or (ops == ("not_in", "in") and vb <= va):
+                return True
     ca, cb = a.get("condition"), b.get("condition")
     if ca and cb and ca["usage_key"] == cb["usage_key"]:
         ra, rb = cond_range(ca), cond_range(cb)
@@ -93,14 +97,17 @@ def check_rule(where, rule, errors):
     if rule.get("op") not in KNOWN_OPS:
         errors.append(f"{where}: unknown op {rule.get('op')!r}")
     keys = rule.get("keys") or []
-    if not any(isinstance(k, str) and k.strip() for k in keys):
-        errors.append(f"{where}: rule needs at least one key")
+    if not isinstance(keys, list) or not isinstance(rule.get("values", []), list):
+        errors.append(f"{where}: keys and values must be lists")
+        return
+    if not keys or not all(isinstance(k, str) and k.strip() for k in keys):
+        errors.append(f"{where}: rule keys must be non-empty strings")
     if len(keys) > MAX_KEYS or len(rule.get("values", [])) > MAX_VALUES:
         errors.append(f"{where}: rule exceeds {MAX_KEYS} keys / {MAX_VALUES} values")
     for s in keys + rule.get("values", []):
         if not isinstance(s, str) or len(s) > MAX_LEN:
             errors.append(f"{where}: keys and values must be strings of at most {MAX_LEN} chars")
-    if rule.get("op") in SET_OPS and not any(v.strip() for v in rule.get("values", [])):
+    if rule.get("op") in SET_OPS and not any(str(v).strip() for v in rule.get("values", [])):
         errors.append(f"{where}: {rule['op']} needs values")
     if rule.get("op") in NUMERIC_OPS:
         value = rule.get("value")
@@ -149,8 +156,9 @@ def check_ambiguity(name, tiers, errors):
     for a, b in combinations(restricted, 2):
         if rank(a) != rank(b) or exclusive(a, b):
             continue
-        union = restrictions(a) | restrictions(b)
-        if any(rank(t) > rank(a) and restrictions(t) >= union for t in restricted):
+        # A tier whose restrictions all come from a or b matches any span both match; outranking them settles it.
+        union = set(restrictions(a)) | set(restrictions(b))
+        if any(rank(t) > rank(a) and set(restrictions(t)) <= union for t in restricted):
             continue
         errors.append(
             f"{name}: tiers {a['name']!r} and {b['name']!r} can match the same span with equal rank; "
@@ -182,8 +190,11 @@ def validate(entries):
         tier_names = [t.get("name") for t in tiers]
         if len(set(tier_names)) != len(tier_names):
             errors.append(f"{name}: duplicate tier names")
+        before = len(errors)
         for tier in tiers:
             check_tier(f"{name} / {tier.get('name')}", tier, errors)
+        if len(errors) > before:
+            continue  # the layout checks below assume well-formed tiers
         if not is_default(tiers[0]):
             errors.append(f"{name}: the first tier must be the unrestricted default")
         check_old_binary_layout(name, tiers, errors)
