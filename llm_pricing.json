@@ -1454,10 +1454,26 @@
     ]
   },
   {
+    "name": "DeepSeek Chat / Reasoner",
+    "provider": "DeepSeek",
+    "description": "DeepSeek compatibility aliases for V4 Flash (deepseek-chat, deepseek-reasoner)",
+    "match_pattern": "(?i)deepseek-(?:chat|reasoner)$",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 1.4e-07,
+          "output": 2.8e-07,
+          "cache_read_input_tokens": 2.8e-09
+        }
+      }
+    ]
+  },
+  {
     "name": "DeepSeek V3",
     "provider": "DeepSeek",
-    "description": "DeepSeek V3 (deepseek-chat)",
-    "match_pattern": "(?i)deepseek-(?:v3|chat)(?:$|-)",
+    "description": "DeepSeek V3",
+    "match_pattern": "(?i)deepseek-v3(?:$|-)",
     "tiers": [
       {
         "name": "Default",
@@ -1472,8 +1488,8 @@
   {
     "name": "DeepSeek R1",
     "provider": "DeepSeek",
-    "description": "DeepSeek R1 reasoning model (deepseek-reasoner)",
-    "match_pattern": "(?i)deepseek-(?:r1|reasoner)(?:-\\d[\\d-]*)?$",
+    "description": "DeepSeek R1 reasoning model",
+    "match_pattern": "(?i)deepseek-r1(?:-\\d[\\d-]*)?$",
     "tiers": [
       {
         "name": "Default",
