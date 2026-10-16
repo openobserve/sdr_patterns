@@ -1,0 +1,22 @@
+name: Validate LLM pricing
+
+on:
+  pull_request:
+    paths:
+      - llm_pricing.json
+      - scripts/validate_llm_pricing.py
+      - .github/workflows/validate-llm-pricing.yml
+  push:
+    branches: [main]
+    paths:
+      - llm_pricing.json
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 scripts/validate_llm_pricing.py llm_pricing.json
