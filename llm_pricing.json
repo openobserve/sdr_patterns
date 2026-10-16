@@ -29,6 +29,37 @@
         }
       },
       {
+        "name": "Ultrafast \u00b7 Extended Context (272k+)",
+        "condition": {
+          "usage_key": "input",
+          "operator": "gte",
+          "value": 272000
+        },
+        "rules": [
+          {
+            "keys": [
+              "openai.response.service_tier",
+              "gen_ai.openai.response.service_tier",
+              "gen_ai.response.service_tier",
+              "openai.request.service_tier",
+              "gen_ai.openai.request.service_tier",
+              "gen_ai.request.service_tier",
+              "param.service_tier"
+            ],
+            "op": "in",
+            "values": [
+              "ultrafast"
+            ]
+          }
+        ],
+        "prices": {
+          "input": 2.4e-05,
+          "output": 9e-05,
+          "cache_read_input_tokens": 1.2e-06,
+          "cache_creation_input_tokens": 3e-05
+        }
+      },
+      {
         "name": "Fast mode \u00b7 Extended Context (272k+)",
         "condition": {
           "usage_key": "input",
@@ -89,6 +120,32 @@
           "output": 7.5e-06,
           "cache_read_input_tokens": 1e-07,
           "cache_creation_input_tokens": 2.5e-06
+        }
+      },
+      {
+        "name": "Ultrafast",
+        "rules": [
+          {
+            "keys": [
+              "openai.response.service_tier",
+              "gen_ai.openai.response.service_tier",
+              "gen_ai.response.service_tier",
+              "openai.request.service_tier",
+              "gen_ai.openai.request.service_tier",
+              "gen_ai.request.service_tier",
+              "param.service_tier"
+            ],
+            "op": "in",
+            "values": [
+              "ultrafast"
+            ]
+          }
+        ],
+        "prices": {
+          "input": 1.2e-05,
+          "output": 6e-05,
+          "cache_read_input_tokens": 6e-07,
+          "cache_creation_input_tokens": 1.5e-05
         }
       },
       {
@@ -2682,7 +2739,7 @@
         "prices": {
           "input": 2e-06,
           "output": 1e-05,
-          "cache_read_input_tokens": 2e-07,
+          "cache_read_input_tokens": 1e-07,
           "cache_creation_input_tokens": 2.5e-06
         }
       }
