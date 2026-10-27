@@ -1,0 +1,40 @@
+{
+  // OpenCode configuration for the scheduled "Update LLM pricing" workflow
+  // (.github/workflows/update-llm-pricing.yml). Same DeepSeek provider shape as
+  // openobserve/openobserve's AI code review.
+  "$schema": "https://opencode.ai/config.json",
+
+  "provider": {
+    "deepseek": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "DeepSeek",
+      "options": {
+        "baseURL": "https://api.deepseek.com",
+        "apiKey": "{env:DEEPSEEK_API_KEY}"
+      },
+      "models": {
+        "deepseek-v4-pro": {
+          "name": "DeepSeek-V4-Pro",
+          "limit": { "context": 1048576, "output": 262144 }
+        }
+      }
+    }
+  },
+
+  "model": "deepseek/deepseek-v4-pro",
+
+  "agent": {
+    // Fetched pricing pages are untrusted input. The agent can only read the repo, fetch
+    // pages and edit files; it has no shell, so it cannot reach the API key or git, and the
+    // workflow only commits llm_pricing.json and the ignore list from whatever it changes.
+    "llm-pricing": {
+      "mode": "primary",
+      "model": "deepseek/deepseek-v4-pro",
+      "tools": {
+        "read": true, "glob": true, "grep": true, "edit": true, "write": true, "webfetch": true,
+        "bash": false, "patch": false, "apply_patch": false, "websearch": false,
+        "task": false, "todowrite": false, "skill": false
+      }
+    }
+  }
+}

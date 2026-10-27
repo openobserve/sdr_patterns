@@ -1,0 +1,214 @@
+{
+  "ignore": [
+    {
+      "pattern": "^qwen-(?:turbo|coder)(?:$|-)",
+      "reason": "Not in the Model Studio international (Singapore) price tables."
+    },
+    {
+      "pattern": "^qwq-plus",
+      "reason": "Not in the Model Studio international (Singapore) price tables."
+    },
+    {
+      "pattern": "^qwen3-(?:next|vl)-",
+      "reason": "Open-weight ids; not in the Model Studio international price tables."
+    },
+    {
+      "pattern": "^qwen3\\.8-omni",
+      "reason": "Omni (audio/video) model; output price depends on modality."
+    },
+    {
+      "pattern": "^command-(?:a-03-2025|r-08-2024|r7b-)",
+      "reason": "Cohere publishes no per-token price for these models."
+    },
+    {
+      "pattern": "^embed-",
+      "reason": "Cohere publishes no per-token embed prices (Embed 5 is priced per hosted instance)."
+    },
+    {
+      "pattern": "^deepseek-(?:coder|v3\\.2)$",
+      "reason": "No longer on DeepSeek's pricing page."
+    },
+    {
+      "pattern": "^gemini-exp-",
+      "reason": "Experimental id with no published price."
+    },
+    {
+      "pattern": "^gemini-gemma-",
+      "reason": "Not on the Gemini API pricing page."
+    },
+    {
+      "pattern": "^gemini-omni-",
+      "reason": "Video generation model; output price depends on modality."
+    },
+    {
+      "pattern": "^gemini-pro-latest$",
+      "reason": "No official page states which model the alias points to now."
+    },
+    {
+      "pattern": "^minimax-m2",
+      "reason": "MiniMax M2 / M2.1 / M2.5 are no longer on the pricing page."
+    },
+    {
+      "pattern": "^(?:codestral-mamba|devstral|magistral|pixtral)-",
+      "reason": "Retired per Mistral's deprecated-models table."
+    },
+    {
+      "pattern": "^mistral-(?:code|vibe-cli)-",
+      "reason": "Not listed on any Mistral page."
+    },
+    {
+      "pattern": "^mistral-(?:small|tiny)$",
+      "reason": "Not documented as an alias of a current model."
+    },
+    {
+      "pattern": "^moonshot-v1-auto$",
+      "reason": "No longer on the Kimi pricing page."
+    },
+    {
+      "pattern": "^gpt-5-chat$",
+      "reason": "Not an OpenAI model id (Azure deployment name); gpt-5-chat-latest is priced."
+    },
+    {
+      "pattern": "^glm-5-code$",
+      "reason": "No longer on the Z.ai pricing page."
+    }
+  ],
+  "feed_disagrees": [
+    {
+      "model": "qwen3.8-flash",
+      "feed": {
+        "cache_read_input_tokens": 1.6e-08,
+        "cache_creation_input_tokens": 2e-07
+      },
+      "reason": "Cache-hit price not published (page says it does not follow the usual ratio).",
+      "source": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/context-cache"
+    },
+    {
+      "model": "qwen3.8-max",
+      "feed": {
+        "cache_read_input_tokens": 2.5e-07
+      },
+      "reason": "Cache-hit price not published (page says it does not follow the usual ratio).",
+      "source": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/context-cache"
+    },
+    {
+      "model": "claude-mythos-preview",
+      "feed": {
+        "input": 1e-05,
+        "output": 5e-05,
+        "cache_read_input_tokens": 1e-06,
+        "cache_creation_input_tokens": 1.25e-05
+      },
+      "reason": "Official price is $25/$125; no cache price published.",
+      "source": "https://www.anthropic.com/glasswing"
+    },
+    {
+      "model": "deepseek-chat",
+      "feed": {
+        "input": 2.8e-07,
+        "output": 4.2e-07,
+        "cache_read_input_tokens": 2.8e-08
+      },
+      "reason": "Not on DeepSeek's current pricing page; entry kept at its last price for historical spans.",
+      "source": "https://api-docs.deepseek.com/quick_start/pricing/"
+    },
+    {
+      "model": "deepseek-flash",
+      "feed": {
+        "input": 3e-07,
+        "output": 1.2e-06,
+        "cache_read_input_tokens": 6e-09
+      },
+      "reason": "Feed has the peak rate only; catalogue default tier is off-peak (half) and peak is a utc_windows tier.",
+      "source": "https://api-docs.deepseek.com/quick_start/pricing/"
+    },
+    {
+      "model": "deepseek-reasoner",
+      "feed": {
+        "input": 2.8e-07,
+        "output": 4.2e-07,
+        "cache_read_input_tokens": 2.8e-08
+      },
+      "reason": "Not on DeepSeek's current pricing page; entry kept at its last price for historical spans.",
+      "source": "https://api-docs.deepseek.com/quick_start/pricing/"
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "feed": {
+        "input": 3e-07,
+        "output": 1.2e-06,
+        "cache_read_input_tokens": 6e-09
+      },
+      "reason": "Feed has the peak rate only; catalogue default tier is off-peak (half) and peak is a utc_windows tier.",
+      "source": "https://api-docs.deepseek.com/quick_start/pricing/"
+    },
+    {
+      "model": "deepseek-v4-pro",
+      "feed": {
+        "input": 1.32e-06,
+        "output": 3.96e-06,
+        "cache_read_input_tokens": 4.4e-08
+      },
+      "reason": "Feed has the peak rate only; catalogue default tier is off-peak (half) and peak is a utc_windows tier.",
+      "source": "https://api-docs.deepseek.com/quick_start/pricing/"
+    },
+    {
+      "model": "gemini-flash-lite-latest",
+      "feed": {
+        "input": 3e-07,
+        "output": 2.5e-06,
+        "cache_read_input_tokens": 3e-08
+      },
+      "reason": "No official page states which model the alias points to now; price left unchanged.",
+      "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    {
+      "model": "mistral-large-4",
+      "feed": {
+        "input": 6.8e-07,
+        "output": 2.09e-06,
+        "cache_read_input_tokens": 6.8e-08
+      },
+      "reason": "Official price is $1.36/$4.18, double the feed.",
+      "source": "https://docs.mistral.ai/inference/pricing"
+    },
+    {
+      "model": "deepseek-v4-flash-vision-exp",
+      "feed": {
+        "input": 3e-07,
+        "output": 1.2e-06,
+        "cache_read_input_tokens": 6e-09
+      },
+      "reason": "Routed to V4 Flash; feed has the peak rate only.",
+      "source": "https://api-docs.deepseek.com/quick_start/pricing/"
+    },
+    {
+      "model": "mistral-large-4-0",
+      "feed": {
+        "input": 6.8e-07,
+        "output": 2.09e-06,
+        "cache_read_input_tokens": 6.8e-08
+      },
+      "reason": "Official price is $1.36/$4.18, double the feed.",
+      "source": "https://docs.mistral.ai/inference/pricing"
+    },
+    {
+      "model": "gpt-3.5-turbo-1106",
+      "feed": {
+        "input": 1e-06,
+        "output": 2e-06
+      },
+      "reason": "OpenAI publishes no per-snapshot price; family price $0.50/$1.50 kept.",
+      "source": "https://developers.openai.com/api/docs/pricing"
+    },
+    {
+      "model": "gpt-3.5-turbo-16k",
+      "feed": {
+        "input": 3e-06,
+        "output": 4e-06
+      },
+      "reason": "OpenAI publishes no per-snapshot price; family price $0.50/$1.50 kept.",
+      "source": "https://developers.openai.com/api/docs/pricing"
+    }
+  ]
+}
