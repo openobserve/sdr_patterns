@@ -1,0 +1,117 @@
+name: Update LLM pricing
+
+# Weekly: diff llm_pricing.json against the LiteLLM feed, let an agent confirm each lead on the
+# provider's own pricing page and edit the catalogue, validate, and open (or refresh) one PR.
+# Nothing merges without review. Instructions the agent follows: scripts/update_llm_pricing.md.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: update-llm-pricing
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  BRANCH: auto/llm-pricing-update
+  OPENCODE_VERSION: "1.17.13"
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The agent step runs with no git credential on disk; the push step adds its own.
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check for drift
+        id: drift
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json \
+            -o "$RUNNER_TEMP/feed.json"
+          python3 scripts/check_llm_pricing_drift.py llm_pricing.json --feed "$RUNNER_TEMP/feed.json" \
+            > "$RUNNER_TEMP/drift.md"
+          count=$(python3 scripts/check_llm_pricing_drift.py llm_pricing.json --feed "$RUNNER_TEMP/feed.json" --count)
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          cat "$RUNNER_TEMP/drift.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Verify DeepSeek API key secret is shared with this repo
+        if: steps.drift.outputs.count != '0'
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: |
+          if [ -z "$DEEPSEEK_API_KEY" ]; then
+            echo "::error::Org secret DEEPSEEK_API_KEY is not available to this repository."
+            exit 1
+          fi
+
+      - name: Install opencode
+        if: steps.drift.outputs.count != '0'
+        run: |
+          curl -fsSL https://opencode.ai/install | bash -s -- --version "$OPENCODE_VERSION"
+          echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
+
+      - name: Update the catalogue
+        if: steps.drift.outputs.count != '0'
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: |
+          cp "$RUNNER_TEMP/drift.md" drift-report.md
+          opencode run --agent llm-pricing \
+            "Follow scripts/update_llm_pricing.md. The drift report is drift-report.md. Update llm_pricing.json (and scripts/llm_pricing_reviewed.json if needed) and write pricing-update-pr.md."
+
+      - name: Validate, and give the agent one chance to fix errors
+        if: steps.drift.outputs.count != '0'
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: |
+          if ! python3 scripts/validate_llm_pricing.py llm_pricing.json > "$RUNNER_TEMP/validate.txt" 2>&1; then
+            cat "$RUNNER_TEMP/validate.txt"
+            opencode run --agent llm-pricing \
+              "scripts/validate_llm_pricing.py rejected llm_pricing.json with these errors. Fix them without changing any verified price, and update pricing-update-pr.md if needed:
+          $(cat "$RUNNER_TEMP/validate.txt")"
+          fi
+          python3 scripts/validate_llm_pricing.py llm_pricing.json
+
+      - name: Open or refresh the pull request
+        if: steps.drift.outputs.count != '0'
+        env:
+          # A PAT so the PR's own checks (validate-llm-pricing.yml) run; GITHUB_TOKEN PRs trigger none.
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          if git diff --quiet -- llm_pricing.json scripts/llm_pricing_reviewed.json; then
+            echo "No catalogue changes were confirmed; nothing to open."
+            exit 0
+          fi
+          if [ ! -s pricing-update-pr.md ]; then
+            echo "Agent changed the catalogue but wrote no PR description; review the run log." > pricing-update-pr.md
+          fi
+          {
+            echo
+            echo "<details><summary>Drift report this run started from</summary>"
+            echo
+            cat "$RUNNER_TEMP/drift.md"
+            echo "</details>"
+          } >> pricing-update-pr.md
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git add llm_pricing.json scripts/llm_pricing_reviewed.json
+          git commit -m "chore(llm-pricing): weekly pricing update"
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "$BRANCH"
+          if gh pr view "$BRANCH" --json state --jq .state 2>/dev/null | grep -q OPEN; then
+            gh pr edit "$BRANCH" --body-file pricing-update-pr.md
+          else
+            gh pr create --head "$BRANCH" --base main \
+              --title "chore(llm-pricing): weekly pricing update" --body-file pricing-update-pr.md
+          fi
