@@ -3023,7 +3023,7 @@
     "name": "Claude Opus 5",
     "provider": "Anthropic",
     "description": "Anthropic Claude Opus 5 \u2014 1M context window, no long-context premium",
-    "match_pattern": "(?i)claude-opus-5(?:$|[@:]|-v\\d|-\\d{8}|-latest)",
+    "match_pattern": "(?i)claude-opus-5(?:$|[@:\\[]|-v\\d|-\\d{8}|-latest)",
     "tiers": [
       {
         "name": "Default",
@@ -3081,7 +3081,7 @@
     "name": "Claude Sonnet 5",
     "provider": "Anthropic",
     "description": "Anthropic Claude Sonnet 5 - 1M context window, no long-context premium. The $2/$10 launch price is now the standard price (the planned 2026-09-01 rise to $3/$15 was cancelled)",
-    "match_pattern": "(?i)claude-sonnet-5(?:$|[@:]|-v\\d|-\\d{8}|-latest)",
+    "match_pattern": "(?i)claude-sonnet-5(?:$|[@:\\[]|-v\\d|-\\d{8}|-latest)",
     "tiers": [
       {
         "name": "Default",
@@ -3115,7 +3115,7 @@
     "name": "Claude Fable 5",
     "provider": "Anthropic",
     "description": "Anthropic Claude Fable 5 \u2014 most capable widely released model, 1M context window",
-    "match_pattern": "(?i)claude-fable-5(?:$|[@:]|-v\\d|-\\d{8}|-latest)",
+    "match_pattern": "(?i)claude-fable-5(?:$|[@:\\[]|-v\\d|-\\d{8}|-latest)",
     "tiers": [
       {
         "name": "Default",
@@ -3149,7 +3149,7 @@
     "name": "Claude Mythos 5",
     "provider": "Anthropic",
     "description": "Anthropic Claude Mythos 5 \u2014 Project Glasswing, same pricing as Fable 5, 1M context window",
-    "match_pattern": "(?i)claude-mythos-5(?:$|[@:]|-v\\d|-\\d{8}|-latest)",
+    "match_pattern": "(?i)claude-mythos-5(?:$|[@:\\[]|-v\\d|-\\d{8}|-latest)",
     "tiers": [
       {
         "name": "Default",
