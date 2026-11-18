@@ -1,0 +1,37 @@
+{
+  "id": "traces",
+  "version": "1.0.0",
+  "title": "Traces (APM)",
+  "description": "Request rate, errors and latency per service from OpenTelemetry traces.",
+  "collector_route": "ingestFromTraces",
+  "folder": {
+    "name": "Traces",
+    "description": "Installed by the Traces starter pack"
+  },
+  "detect": {
+    "streams": [
+      {
+        "type": "traces"
+      }
+    ]
+  },
+  "dashboards": [
+    {
+      "id": "apm",
+      "title": "Traces APM",
+      "gallery_path": "Traces_APM/Traces APM.dashboard.json"
+    }
+  ],
+  "alerts": {
+    "core": [
+      "apm/traces_service_error_rate_high",
+      "apm/traces_service_p95_latency_high",
+      "apm/traces_dependency_error_rate_high"
+    ],
+    "more": [
+      "apm/traces_operation_error_burst"
+    ]
+  },
+  "saved_views": [],
+  "paused_impact": "a service's error rate or latency climbs, or a dependency starts failing"
+}

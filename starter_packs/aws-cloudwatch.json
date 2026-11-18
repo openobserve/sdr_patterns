@@ -1,0 +1,63 @@
+{
+  "id": "aws-cloudwatch",
+  "version": "1.0.0",
+  "title": "AWS CloudWatch",
+  "description": "EC2, RDS, load balancer, Lambda and SQS health from a CloudWatch metric stream.",
+  "logo": "images/ingestion/aws.svg",
+  "collector_route": "cloudwatchMetrics",
+  "folder": {
+    "name": "AWS CloudWatch",
+    "description": "Installed by the AWS CloudWatch starter pack"
+  },
+  "detect": {
+    "streams": [
+      {
+        "type": "logs",
+        "name": "cloudwatch_metrics"
+      }
+    ]
+  },
+  "dashboards": [
+    {
+      "id": "overview",
+      "title": "AWS CloudWatch Overview",
+      "gallery_path": "AWS_CloudWatch/AWS_CloudWatch_Overview.dashboard.json"
+    }
+  ],
+  "alerts": {
+    "core": [
+      "opentelemetry/aws_ec2_status_check_failed",
+      "opentelemetry/aws_ec2_high_cpu",
+      "opentelemetry/aws_rds_low_free_storage",
+      "opentelemetry/aws_alb_high_5xx_rate",
+      "opentelemetry/aws_lambda_high_error_rate_otel",
+      "opentelemetry/aws_sqs_old_messages"
+    ],
+    "more": [
+      "opentelemetry/aws_cloudwatch_metric_stream_stopped"
+    ]
+  },
+  "roles": [
+    {
+      "id": "metrics",
+      "title": "CloudWatch metrics",
+      "stream": "cloudwatch_metrics",
+      "fields": [
+        "namespace",
+        "metric_name",
+        "account_id",
+        "region",
+        "value_sum",
+        "value_count"
+      ],
+      "identity": [
+        {
+          "field": "namespace",
+          "pattern": "^AWS/"
+        }
+      ]
+    }
+  ],
+  "saved_views": [],
+  "paused_impact": "an AWS resource fails, fills up or starts erroring"
+}

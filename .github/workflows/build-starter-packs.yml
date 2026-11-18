@@ -1,0 +1,37 @@
+name: Build starter packs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - starter_packs/**
+      - scripts/build_starter_packs.py
+  workflow_dispatch:
+
+concurrency:
+  group: build-starter-packs
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 scripts/build_starter_packs.py
+      - name: Commit starter_packs.json if it changed
+        run: |
+          if git diff --quiet -- starter_packs.json; then
+            echo "starter_packs.json is up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add starter_packs.json
+          git commit -m "chore(starter-packs): rebuild starter_packs.json"
+          git push origin HEAD:main

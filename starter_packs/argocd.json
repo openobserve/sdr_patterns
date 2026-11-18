@@ -1,0 +1,41 @@
+{
+  "id": "argocd",
+  "version": "1.0.0",
+  "title": "Argo CD",
+  "description": "Application sync and health, Git fetches and controller load from Argo CD's own metrics.",
+  "paused_impact": "an application fails to sync, turns unhealthy or can't fetch from Git",
+  "folder": {
+    "name": "Argo CD",
+    "description": "Installed by the Argo CD starter pack"
+  },
+  "detect": {
+    "metric_names": [
+      [
+        "argocd_app_info"
+      ],
+      [
+        "argocd_app_sync_total"
+      ]
+    ]
+  },
+  "dashboards": [
+    {
+      "id": "monitoring",
+      "title": "ArgoCD Monitoring",
+      "gallery_path": "ArgoCD/ArgoCD Monitoring.dashboard.json"
+    }
+  ],
+  "alerts": {
+    "core": [
+      "ci-cd/argocd_application_sync_failed",
+      "ci-cd/argocd_service_unhealthy",
+      "ci-cd/argocd_service_not_synced",
+      "ci-cd/argocd_git_fetch_failures",
+      "ci-cd/argocd_cluster_connection_error"
+    ],
+    "more": [
+      "ci-cd/argocd_application_controller_slow_reconciliation"
+    ]
+  },
+  "saved_views": []
+}

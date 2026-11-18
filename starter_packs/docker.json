@@ -1,0 +1,40 @@
+{
+  "id": "docker",
+  "version": "1.0.0",
+  "title": "Docker",
+  "description": "Container CPU, memory, network and disk from the OpenTelemetry Docker stats receiver.",
+  "logo": "images/common/docker.svg",
+  "folder": {
+    "name": "Docker",
+    "description": "Installed by the Docker starter pack"
+  },
+  "detect": {
+    "metric_names": [
+      [
+        "container_memory_percent"
+      ],
+      [
+        "container_cpu_usage_total"
+      ]
+    ]
+  },
+  "dashboards": [
+    {
+      "id": "containers",
+      "title": "Docker Container Metrics",
+      "gallery_path": "Docker_Metrics/Docker Container Metrics.dashboard.json"
+    }
+  ],
+  "alerts": {
+    "core": [
+      "opentelemetry/container_high_memory_usage_otel",
+      "opentelemetry/container_memory_near_limit_otel",
+      "opentelemetry/docker_stopped_reporting"
+    ],
+    "more": [
+      "opentelemetry/container_absent_otel"
+    ]
+  },
+  "saved_views": [],
+  "paused_impact": "a container runs out of memory or container metrics stop arriving"
+}

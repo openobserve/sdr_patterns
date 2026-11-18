@@ -1,0 +1,45 @@
+{
+  "id": "postgresql",
+  "version": "1.0.0",
+  "title": "PostgreSQL",
+  "description": "Connections, commits, database size and locks from the OpenTelemetry PostgreSQL receiver.",
+  "logo": "images/ingestion/postgres.png",
+  "collector_route": "postgres",
+  "folder": {
+    "name": "PostgreSQL",
+    "description": "Installed by the PostgreSQL starter pack"
+  },
+  "detect": {
+    "metric_names": [
+      [
+        "postgresql_backends"
+      ],
+      [
+        "postgresql_commits"
+      ],
+      [
+        "postgresql_db_size"
+      ]
+    ]
+  },
+  "dashboards": [
+    {
+      "id": "overview",
+      "title": "PostgreSQL",
+      "gallery_path": "PostgreSQL Metrics (opentelemetry-contrib)/PostgreSQL.dashboard.json"
+    }
+  ],
+  "alerts": {
+    "core": [
+      "opentelemetry/postgresql_down_otel",
+      "opentelemetry/postgresql_too_many_connections_otel",
+      "opentelemetry/postgresql_low_cache_hit_rate_otel",
+      "opentelemetry/postgresql_high_rollback_rate_otel"
+    ],
+    "more": [
+      "opentelemetry/postgresql_replication_lag_otel"
+    ]
+  },
+  "saved_views": [],
+  "paused_impact": "PostgreSQL goes down, runs out of connections or slows down"
+}
