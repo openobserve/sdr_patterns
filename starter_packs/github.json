@@ -1,0 +1,63 @@
+{
+  "id": "github",
+  "version": "1.0.0",
+  "title": "GitHub (Actions)",
+  "description": "Workflow runs, failures and duration from GitHub Actions events.",
+  "logo": "images/ingestion/github-actions.svg",
+  "collector_route": "github-actions",
+  "folder": {
+    "name": "GitHub",
+    "description": "Installed by the GitHub starter pack"
+  },
+  "detect": {
+    "streams": [
+      {
+        "type": "logs",
+        "name": "githubactions"
+      }
+    ]
+  },
+  "dashboards": [
+    {
+      "id": "job_logs",
+      "title": "GitHub Actions Job Logs",
+      "summary": "Job errors, top error messages, rough job times",
+      "gallery_path": "GitHub_Actions/GitHub_Actions_Job_Logs.dashboard.json"
+    }
+  ],
+  "alerts": {
+    "core": [
+      "opentelemetry/github_actions_job_errors",
+      "opentelemetry/github_actions_logs_stopped"
+    ],
+    "more": []
+  },
+  "roles": [
+    {
+      "id": "job_logs",
+      "title": "GitHub Actions job logs",
+      "stream": "githubactions",
+      "fields": [
+        "run_id",
+        "job_id",
+        "log"
+      ],
+      "identity": [
+        {
+          "field": "log",
+          "pattern": "##\\[(group|endgroup|error|warning)\\]"
+        }
+      ]
+    }
+  ],
+  "saved_views": [],
+  "paused_impact": "a GitHub Actions job logs errors or job logs stop arriving",
+  "alert_summaries": {
+    "opentelemetry/github_actions_job_errors": "A workflow job logged an error, a step failed",
+    "opentelemetry/github_actions_logs_stopped": "No job logs received in the last 24 hours"
+  },
+  "tile_summaries": {
+    "dashboards": "Job errors, top error messages, rough job times",
+    "alerts": "Failed workflow steps and job logs that stop arriving"
+  }
+}

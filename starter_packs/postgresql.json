@@ -1,0 +1,57 @@
+{
+  "id": "postgresql",
+  "version": "1.0.0",
+  "title": "PostgreSQL",
+  "description": "Connections, commits, database size and locks from the OpenTelemetry PostgreSQL receiver.",
+  "logo": "images/ingestion/postgres.png",
+  "collector_route": "postgres",
+  "folder": {
+    "name": "PostgreSQL",
+    "description": "Installed by the PostgreSQL starter pack"
+  },
+  "detect": {
+    "metric_names": [
+      [
+        "postgresql_backends"
+      ],
+      [
+        "postgresql_commits"
+      ],
+      [
+        "postgresql_db_size"
+      ]
+    ]
+  },
+  "dashboards": [
+    {
+      "id": "overview",
+      "title": "PostgreSQL",
+      "summary": "Connections, cache, transactions and table health",
+      "gallery_path": "PostgreSQL Metrics (opentelemetry-contrib)/PostgreSQL.dashboard.json"
+    }
+  ],
+  "alerts": {
+    "core": [
+      "opentelemetry/postgresql_down_otel",
+      "opentelemetry/postgresql_too_many_connections_otel",
+      "opentelemetry/postgresql_low_cache_hit_rate_otel",
+      "opentelemetry/postgresql_high_rollback_rate_otel"
+    ],
+    "more": [
+      "opentelemetry/postgresql_replication_lag_otel"
+    ]
+  },
+  "saved_views": [],
+  "paused_impact": "PostgreSQL goes down, runs out of connections or slows down",
+  "alert_summaries": {
+    "opentelemetry/postgresql_down_otel": "PostgreSQL stopped reporting: down or unreachable",
+    "opentelemetry/postgresql_too_many_connections_otel": "Connections above 80% of max for 10 minutes",
+    "opentelemetry/postgresql_low_cache_hit_rate_otel": "Cache hit rate under 95% while reading from disk",
+    "opentelemetry/postgresql_high_rollback_rate_otel": "Over 10% of transactions rolled back in 10 min",
+    "opentelemetry/postgresql_replication_lag_otel": "Replica over 1 GiB behind the primary for 5 min"
+  },
+  "tile_summaries": {
+    "dashboards": "Connections, cache, transactions and table health",
+    "alerts": "Down, connection limit, cache misses, rollbacks, lag"
+  }
+}

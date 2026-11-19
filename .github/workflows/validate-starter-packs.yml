@@ -1,0 +1,19 @@
+name: Validate starter packs
+
+on:
+  pull_request:
+    paths:
+      - starter_packs/**
+      - starter_packs.json
+      - scripts/build_starter_packs.py
+      - .github/workflows/validate-starter-packs.yml
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 scripts/build_starter_packs.py --check --remote
