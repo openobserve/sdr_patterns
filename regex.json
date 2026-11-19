@@ -1235,7 +1235,7 @@
     ],
     "Examples": {
       "Valid": [
-        "otpauth://totp/Example:alice@google.com?secret=JBSWY3DPEHPK3PXP&issuer=Example",
+        "otpauth://totp/Example:alice@example.com?secret=JBSWY3DPEHPK3PXP&issuer=Example",
         "otpauth://totp/My_Ex0T1c-L00king.name?issuer=ArgsShouldBeCommutable&secret=JBSWY3DPEHPK3PXP&digits=6&period=30"
       ],
       "Invalid": []
@@ -1423,7 +1423,7 @@
         "http://foo.com/?q=Test%20URL-encoded%20stuff",
         "http://d.com/#@.s?h/",
         "https://en.wikipedia.org/wiki/Swiss_cheese_(North_America)#Production",
-        "https://example.com#admin@email.com",
+        "https://example.com#admin@example.com",
         "http://user:pass%21word@example.com/path/to/input.avi",
         "http://user%40example.com:pass%21word@example.com/path/to/input.avi",
         "http://u-rl.com/",
@@ -1598,7 +1598,7 @@
     ],
     "Examples": {
       "Valid": [
-        "github@skerritt.blog",
+        "user@example.com",
         "firstname+lastname@example.com",
         "john.smith@[123.123.123.123]"
       ],
