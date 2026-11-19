@@ -1,0 +1,14 @@
+{
+  "format_version": "1.0.0",
+  "packs": [
+    "kubernetes",
+    "hosts",
+    "traces",
+    "postgresql",
+    "docker",
+    "aws-cloudwatch",
+    "genai",
+    "github",
+    "argocd"
+  ]
+}

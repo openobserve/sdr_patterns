@@ -1,0 +1,52 @@
+{
+  "id": "genai",
+  "version": "1.0.0",
+  "title": "AI (LLM apps)",
+  "description": "Requests, tokens, cost and latency per model from OpenTelemetry GenAI traces.",
+  "folder": {
+    "name": "AI (LLM apps)",
+    "description": "Installed by the AI starter pack"
+  },
+  "detect": {
+    "streams": [
+      {
+        "type": "traces",
+        "fields": [
+          "gen_ai_operation_name"
+        ]
+      }
+    ]
+  },
+  "dashboards": [
+    {
+      "id": "overview",
+      "title": "AI LLM Apps",
+      "summary": "LLM calls, cost, tokens, errors and latency",
+      "gallery_path": "AI_LLM_Apps/AI LLM Apps.dashboard.json"
+    }
+  ],
+  "alerts": {
+    "core": [
+      "ai/llm_error_rate_high",
+      "ai/llm_p95_latency_high",
+      "ai/llm_hourly_spend_high"
+    ],
+    "more": [
+      "ai/llm_token_burn_high",
+      "ai/llm_tool_agent_failures"
+    ]
+  },
+  "saved_views": [],
+  "paused_impact": "LLM calls fail, slow down or cost more than expected",
+  "alert_summaries": {
+    "ai/llm_error_rate_high": "Over 10% of LLM calls failing in 10 min",
+    "ai/llm_p95_latency_high": "A model's p95 response time above 15 s",
+    "ai/llm_hourly_spend_high": "LLM spend above 50 USD in the last hour",
+    "ai/llm_token_burn_high": "A service used over 2M tokens in an hour",
+    "ai/llm_tool_agent_failures": "A tool or agent failed 5+ times in 15 min"
+  },
+  "tile_summaries": {
+    "dashboards": "LLM calls, cost, tokens, errors and latency",
+    "alerts": "Failing or slow LLM calls, spend, tokens, tool errors"
+  }
+}
