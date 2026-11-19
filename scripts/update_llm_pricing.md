@@ -41,8 +41,13 @@ Alibaba https://www.alibabacloud.com/help/en/model-studio/models
   `rules` tiers and peak/off-peak `utc_windows` tiers unless the provider dropped them.
 - `match_pattern` is a Rust regex starting with `(?i)`, dots escaped. It must match the ids the
   API reports (dated snapshots, `-latest` aliases) and must not catch a sibling priced
-  differently. Entries are matched in file order, so a specific entry goes **before** the more
-  general one (`gpt-5.1-codex-mini` before `gpt-5.1`).
+  differently. The server prefers a pattern that matches the whole id (exact) over one that
+  matches only part of it (approximate); among equal matches the entry whose name sorts first
+  wins. Servers before openobserve#15524 take the first match in name order, ignoring
+  exactness, so there a general pattern bills a specific id when its name sorts first
+  (`GPT-5.1` before `GPT-5.1 Codex Mini`). Two patterns must never both match one whole id. File
+  order does not affect the server; keep a specific entry before the general one
+  (`gpt-5.1-codex-mini` before `gpt-5.1`), because the drift script matches in file order.
 - One entry per distinct price, not per snapshot. Never delete an entry for a retired model:
   the server disables removed entries, and historical spans still need the price.
 

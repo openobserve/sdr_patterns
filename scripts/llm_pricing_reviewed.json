@@ -71,6 +71,10 @@
     {
       "pattern": "^glm-5-code$",
       "reason": "No longer on the Z.ai pricing page."
+    },
+    {
+      "pattern": "^glm-5v-turbo",
+      "reason": "Not on the Z.ai pricing page."
     }
   ],
   "feed_disagrees": [
@@ -163,16 +167,6 @@
       "source": "https://ai.google.dev/gemini-api/docs/pricing"
     },
     {
-      "model": "mistral-large-4",
-      "feed": {
-        "input": 6.8e-07,
-        "output": 2.09e-06,
-        "cache_read_input_tokens": 6.8e-08
-      },
-      "reason": "Official price is $1.36/$4.18, double the feed.",
-      "source": "https://docs.mistral.ai/inference/pricing"
-    },
-    {
       "model": "deepseek-v4-flash-vision-exp",
       "feed": {
         "input": 3e-07,
@@ -181,16 +175,6 @@
       },
       "reason": "Routed to V4 Flash; feed has the peak rate only.",
       "source": "https://api-docs.deepseek.com/quick_start/pricing/"
-    },
-    {
-      "model": "mistral-large-4-0",
-      "feed": {
-        "input": 6.8e-07,
-        "output": 2.09e-06,
-        "cache_read_input_tokens": 6.8e-08
-      },
-      "reason": "Official price is $1.36/$4.18, double the feed.",
-      "source": "https://docs.mistral.ai/inference/pricing"
     },
     {
       "model": "gpt-3.5-turbo-1106",
@@ -208,6 +192,14 @@
         "output": 4e-06
       },
       "reason": "OpenAI publishes no per-snapshot price; family price $0.50/$1.50 kept.",
+      "source": "https://developers.openai.com/api/docs/pricing"
+    },
+    {
+      "model": "gpt-6-rosalind",
+      "feed": {
+        "cache_creation_input_tokens": 1.875e-05
+      },
+      "reason": "Official 30-minute cache write price is $12.50; the feed has $18.75.",
       "source": "https://developers.openai.com/api/docs/pricing"
     }
   ]
