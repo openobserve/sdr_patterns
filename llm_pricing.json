@@ -1,5 +1,330 @@
 [
   {
+    "name": "GPT-6.2 Astra for Law",
+    "provider": "OpenAI",
+    "description": "OpenAI GPT-6.2 Astra for Law (legal model configuration) - extended context pricing at 272k+ input tokens. Promotional pricing, available at least through 2026-12-31",
+    "match_pattern": "(?i)gpt-6\\.2-astra-law",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 8e-06,
+          "output": 4e-05,
+          "cache_read_input_tokens": 4e-07,
+          "cache_creation_input_tokens": 1e-05
+        }
+      },
+      {
+        "name": "Extended Context (272k+)",
+        "condition": {
+          "usage_key": "input",
+          "operator": "gte",
+          "value": 272000
+        },
+        "prices": {
+          "input": 1.6e-05,
+          "output": 6e-05,
+          "cache_read_input_tokens": 8e-07,
+          "cache_creation_input_tokens": 2e-05
+        }
+      }
+    ]
+  },
+  {
+    "name": "GPT-6.2 Astra",
+    "provider": "OpenAI",
+    "description": "OpenAI GPT-6.2 Astra - extended context pricing at 272k+ input tokens. Ultrafast is the promotional 3x rate through 2027-02-28; 6x from 2027-03-01. No Flex tier published",
+    "match_pattern": "(?i)gpt-6\\.2-astra(?:$|-\\d)",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 8e-06,
+          "output": 4e-05,
+          "cache_read_input_tokens": 4e-07,
+          "cache_creation_input_tokens": 1e-05
+        }
+      },
+      {
+        "name": "Extended Context (272k+)",
+        "condition": {
+          "usage_key": "input",
+          "operator": "gte",
+          "value": 272000
+        },
+        "prices": {
+          "input": 1.6e-05,
+          "output": 6e-05,
+          "cache_read_input_tokens": 8e-07,
+          "cache_creation_input_tokens": 2e-05
+        }
+      },
+      {
+        "name": "Ultrafast \u00b7 Extended Context (272k+)",
+        "condition": {
+          "usage_key": "input",
+          "operator": "gte",
+          "value": 272000
+        },
+        "rules": [
+          {
+            "keys": [
+              "openai.response.service_tier",
+              "gen_ai.openai.response.service_tier",
+              "gen_ai.response.service_tier",
+              "openai.request.service_tier",
+              "gen_ai.openai.request.service_tier",
+              "gen_ai.request.service_tier",
+              "param.service_tier"
+            ],
+            "op": "in",
+            "values": [
+              "ultrafast"
+            ]
+          }
+        ],
+        "prices": {
+          "input": 4.8e-05,
+          "output": 0.00018,
+          "cache_read_input_tokens": 2.4e-06,
+          "cache_creation_input_tokens": 6e-05
+        }
+      },
+      {
+        "name": "Fast mode \u00b7 Extended Context (272k+)",
+        "condition": {
+          "usage_key": "input",
+          "operator": "gte",
+          "value": 272000
+        },
+        "rules": [
+          {
+            "keys": [
+              "openai.response.service_tier",
+              "gen_ai.openai.response.service_tier",
+              "gen_ai.response.service_tier",
+              "openai.request.service_tier",
+              "gen_ai.openai.request.service_tier",
+              "gen_ai.request.service_tier",
+              "param.service_tier"
+            ],
+            "op": "in",
+            "values": [
+              "fast",
+              "priority"
+            ]
+          }
+        ],
+        "prices": {
+          "input": 3.2e-05,
+          "output": 0.00012,
+          "cache_read_input_tokens": 1.6e-06,
+          "cache_creation_input_tokens": 4e-05
+        }
+      },
+      {
+        "name": "Ultrafast",
+        "rules": [
+          {
+            "keys": [
+              "openai.response.service_tier",
+              "gen_ai.openai.response.service_tier",
+              "gen_ai.response.service_tier",
+              "openai.request.service_tier",
+              "gen_ai.openai.request.service_tier",
+              "gen_ai.request.service_tier",
+              "param.service_tier"
+            ],
+            "op": "in",
+            "values": [
+              "ultrafast"
+            ]
+          }
+        ],
+        "prices": {
+          "input": 2.4e-05,
+          "output": 0.00012,
+          "cache_read_input_tokens": 1.2e-06,
+          "cache_creation_input_tokens": 3e-05
+        }
+      },
+      {
+        "name": "Fast mode",
+        "rules": [
+          {
+            "keys": [
+              "openai.response.service_tier",
+              "gen_ai.openai.response.service_tier",
+              "gen_ai.response.service_tier",
+              "openai.request.service_tier",
+              "gen_ai.openai.request.service_tier",
+              "gen_ai.request.service_tier",
+              "param.service_tier"
+            ],
+            "op": "in",
+            "values": [
+              "fast",
+              "priority"
+            ]
+          }
+        ],
+        "prices": {
+          "input": 1.6e-05,
+          "output": 8e-05,
+          "cache_read_input_tokens": 8e-07,
+          "cache_creation_input_tokens": 2e-05
+        }
+      }
+    ]
+  },
+  {
+    "name": "GPT-6.2 Sol",
+    "provider": "OpenAI",
+    "description": "OpenAI GPT-6.2 Sol - extended context pricing at 272k+ input tokens. Ultrafast is the promotional 3x rate through 2027-02-28; 6x from 2027-03-01. No Flex tier published",
+    "match_pattern": "(?i)gpt-6\\.2-sol",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 2e-06,
+          "output": 1e-05,
+          "cache_read_input_tokens": 1e-07,
+          "cache_creation_input_tokens": 2.5e-06
+        }
+      },
+      {
+        "name": "Extended Context (272k+)",
+        "condition": {
+          "usage_key": "input",
+          "operator": "gte",
+          "value": 272000
+        },
+        "prices": {
+          "input": 4e-06,
+          "output": 1.5e-05,
+          "cache_read_input_tokens": 2e-07,
+          "cache_creation_input_tokens": 5e-06
+        }
+      },
+      {
+        "name": "Ultrafast \u00b7 Extended Context (272k+)",
+        "condition": {
+          "usage_key": "input",
+          "operator": "gte",
+          "value": 272000
+        },
+        "rules": [
+          {
+            "keys": [
+              "openai.response.service_tier",
+              "gen_ai.openai.response.service_tier",
+              "gen_ai.response.service_tier",
+              "openai.request.service_tier",
+              "gen_ai.openai.request.service_tier",
+              "gen_ai.request.service_tier",
+              "param.service_tier"
+            ],
+            "op": "in",
+            "values": [
+              "ultrafast"
+            ]
+          }
+        ],
+        "prices": {
+          "input": 1.2e-05,
+          "output": 4.5e-05,
+          "cache_read_input_tokens": 6e-07,
+          "cache_creation_input_tokens": 1.5e-05
+        }
+      },
+      {
+        "name": "Fast mode \u00b7 Extended Context (272k+)",
+        "condition": {
+          "usage_key": "input",
+          "operator": "gte",
+          "value": 272000
+        },
+        "rules": [
+          {
+            "keys": [
+              "openai.response.service_tier",
+              "gen_ai.openai.response.service_tier",
+              "gen_ai.response.service_tier",
+              "openai.request.service_tier",
+              "gen_ai.openai.request.service_tier",
+              "gen_ai.request.service_tier",
+              "param.service_tier"
+            ],
+            "op": "in",
+            "values": [
+              "fast",
+              "priority"
+            ]
+          }
+        ],
+        "prices": {
+          "input": 8e-06,
+          "output": 3e-05,
+          "cache_read_input_tokens": 4e-07,
+          "cache_creation_input_tokens": 1e-05
+        }
+      },
+      {
+        "name": "Ultrafast",
+        "rules": [
+          {
+            "keys": [
+              "openai.response.service_tier",
+              "gen_ai.openai.response.service_tier",
+              "gen_ai.response.service_tier",
+              "openai.request.service_tier",
+              "gen_ai.openai.request.service_tier",
+              "gen_ai.request.service_tier",
+              "param.service_tier"
+            ],
+            "op": "in",
+            "values": [
+              "ultrafast"
+            ]
+          }
+        ],
+        "prices": {
+          "input": 6e-06,
+          "output": 3e-05,
+          "cache_read_input_tokens": 3e-07,
+          "cache_creation_input_tokens": 7.5e-06
+        }
+      },
+      {
+        "name": "Fast mode",
+        "rules": [
+          {
+            "keys": [
+              "openai.response.service_tier",
+              "gen_ai.openai.response.service_tier",
+              "gen_ai.response.service_tier",
+              "openai.request.service_tier",
+              "gen_ai.openai.request.service_tier",
+              "gen_ai.request.service_tier",
+              "param.service_tier"
+            ],
+            "op": "in",
+            "values": [
+              "fast",
+              "priority"
+            ]
+          }
+        ],
+        "prices": {
+          "input": 4e-06,
+          "output": 2e-05,
+          "cache_read_input_tokens": 2e-07,
+          "cache_creation_input_tokens": 5e-06
+        }
+      }
+    ]
+  },
+  {
     "name": "GPT-6.1 Sol",
     "provider": "OpenAI",
     "description": "OpenAI GPT-6.1 Sol - extended context pricing at 272k+ input tokens",
@@ -844,6 +1169,67 @@
           "output": 2.5e-07,
           "cache_read_input_tokens": 5e-09,
           "cache_creation_input_tokens": 6.25e-08
+        }
+      }
+    ]
+  },
+  {
+    "name": "GPT-6 Cyber",
+    "provider": "OpenAI",
+    "description": "OpenAI GPT-6 Cyber (trusted access, Daybreak) - extended context pricing at 272k+ input tokens; no long-context cache-write price published",
+    "match_pattern": "(?i)gpt-6-cyber",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 2e-05,
+          "output": 0.0001,
+          "cache_read_input_tokens": 2e-06,
+          "cache_creation_input_tokens": 2.5e-05
+        }
+      },
+      {
+        "name": "Extended Context (272k+)",
+        "condition": {
+          "usage_key": "input",
+          "operator": "gte",
+          "value": 272000
+        },
+        "prices": {
+          "input": 4e-05,
+          "output": 0.00015,
+          "cache_read_input_tokens": 4e-06
+        }
+      }
+    ]
+  },
+  {
+    "name": "GPT-6 Rosalind",
+    "provider": "OpenAI",
+    "description": "OpenAI GPT-6 Rosalind (life sciences, trusted access) - extended context pricing at 272k+ input tokens. Promotional pricing, available at least through 2026-12-31",
+    "match_pattern": "(?i)gpt-6-rosalind",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 1e-05,
+          "output": 5e-05,
+          "cache_read_input_tokens": 1e-06,
+          "cache_creation_input_tokens": 1.25e-05
+        }
+      },
+      {
+        "name": "Extended Context (272k+)",
+        "condition": {
+          "usage_key": "input",
+          "operator": "gte",
+          "value": 272000
+        },
+        "prices": {
+          "input": 2e-05,
+          "output": 7.5e-05,
+          "cache_read_input_tokens": 2e-06,
+          "cache_creation_input_tokens": 2.5e-05
         }
       }
     ]
@@ -3095,6 +3481,47 @@
     ]
   },
   {
+    "name": "Claude Fable 5.2",
+    "provider": "Anthropic",
+    "description": "Anthropic Claude Fable 5.2 \u2014 1M context window, no long-context premium; cache reads at 0.025x input",
+    "match_pattern": "(?i)claude-fable-5-2",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 8e-06,
+          "output": 4e-05,
+          "cache_read_input_tokens": 2e-07,
+          "cache_creation_input_tokens": 1e-05
+        }
+      },
+      {
+        "name": "Fast mode",
+        "rules": [
+          {
+            "keys": [
+              "anthropic.response.speed",
+              "gen_ai.response.speed",
+              "anthropic.request.speed",
+              "gen_ai.request.speed",
+              "param.speed"
+            ],
+            "op": "in",
+            "values": [
+              "fast"
+            ]
+          }
+        ],
+        "prices": {
+          "input": 1.6e-05,
+          "output": 8e-05,
+          "cache_read_input_tokens": 4e-07,
+          "cache_creation_input_tokens": 2e-05
+        }
+      }
+    ]
+  },
+  {
     "name": "Claude Fable 5.1",
     "provider": "Anthropic",
     "description": "Anthropic Claude Fable 5.1 \u2014 1M context window",
@@ -3124,6 +3551,47 @@
           "output": 5e-05,
           "cache_read_input_tokens": 1e-06,
           "cache_creation_input_tokens": 1.25e-05
+        }
+      }
+    ]
+  },
+  {
+    "name": "Claude Mythos 5.2",
+    "provider": "Anthropic",
+    "description": "Anthropic Claude Mythos 5.2 \u2014 same pricing as Fable 5.2, 1M context window",
+    "match_pattern": "(?i)claude-mythos-5-2",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 8e-06,
+          "output": 4e-05,
+          "cache_read_input_tokens": 2e-07,
+          "cache_creation_input_tokens": 1e-05
+        }
+      },
+      {
+        "name": "Fast mode",
+        "rules": [
+          {
+            "keys": [
+              "anthropic.response.speed",
+              "gen_ai.response.speed",
+              "anthropic.request.speed",
+              "gen_ai.request.speed",
+              "param.speed"
+            ],
+            "op": "in",
+            "values": [
+              "fast"
+            ]
+          }
+        ],
+        "prices": {
+          "input": 1.6e-05,
+          "output": 8e-05,
+          "cache_read_input_tokens": 4e-07,
+          "cache_creation_input_tokens": 2e-05
         }
       }
     ]
@@ -3308,7 +3776,7 @@
   {
     "name": "Claude Sonnet 4.5",
     "provider": "Anthropic",
-    "description": "Anthropic Claude Sonnet 4.5 \u2014 extended context pricing at 200k+ input tokens",
+    "description": "Anthropic Claude Sonnet 4.5 \u2014 200K context window; the 200k+ long-context tier is no longer on Anthropic's pricing page",
     "match_pattern": "(?i)claude-sonnet-4-5",
     "tiers": [
       {
@@ -3318,20 +3786,6 @@
           "output": 1.5e-05,
           "cache_read_input_tokens": 3e-07,
           "cache_creation_input_tokens": 3.75e-06
-        }
-      },
-      {
-        "name": "Extended Context (200k+)",
-        "condition": {
-          "usage_key": "input",
-          "operator": "gte",
-          "value": 200000
-        },
-        "prices": {
-          "input": 6e-06,
-          "output": 2.25e-05,
-          "cache_read_input_tokens": 6e-07,
-          "cache_creation_input_tokens": 7.5e-06
         }
       }
     ]
@@ -4250,6 +4704,129 @@
     ]
   },
   {
+    "name": "Gemini 4 Carbon",
+    "provider": "Google",
+    "description": "Google Gemini 4 Carbon - 1M context, implicit caching only. Introductory price through 2026-11-30; doubles to $4/$20 (cache $0.20; Priority $7.20/$36/$0.36) from 2026-12-01",
+    "match_pattern": "(?i)gemini-4-carbon",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 2e-06,
+          "output": 1e-05,
+          "cache_read_input_tokens": 1e-07
+        }
+      },
+      {
+        "name": "Priority",
+        "rules": [
+          {
+            "keys": [
+              "openai.response.service_tier",
+              "gen_ai.openai.response.service_tier",
+              "gen_ai.response.service_tier",
+              "openai.request.service_tier",
+              "gen_ai.openai.request.service_tier",
+              "gen_ai.request.service_tier",
+              "param.service_tier"
+            ],
+            "op": "in",
+            "values": [
+              "priority"
+            ]
+          }
+        ],
+        "prices": {
+          "input": 3.6e-06,
+          "output": 1.8e-05,
+          "cache_read_input_tokens": 1.8e-07
+        }
+      }
+    ]
+  },
+  {
+    "name": "Gemini 4 Neon",
+    "provider": "Google",
+    "description": "Google Gemini 4 Neon - 1M context, implicit caching only",
+    "match_pattern": "(?i)gemini-4-neon",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 3e-06,
+          "output": 1.5e-05,
+          "cache_read_input_tokens": 1.5e-07
+        }
+      },
+      {
+        "name": "Priority",
+        "rules": [
+          {
+            "keys": [
+              "openai.response.service_tier",
+              "gen_ai.openai.response.service_tier",
+              "gen_ai.response.service_tier",
+              "openai.request.service_tier",
+              "gen_ai.openai.request.service_tier",
+              "gen_ai.request.service_tier",
+              "param.service_tier"
+            ],
+            "op": "in",
+            "values": [
+              "priority"
+            ]
+          }
+        ],
+        "prices": {
+          "input": 5.4e-06,
+          "output": 2.7e-05,
+          "cache_read_input_tokens": 2.7e-07
+        }
+      }
+    ]
+  },
+  {
+    "name": "Gemini 4 Hydrogen",
+    "provider": "Google",
+    "description": "Google Gemini 4 Hydrogen - 1M context, implicit caching only",
+    "match_pattern": "(?i)gemini-4-hydrogen",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 1.5e-06,
+          "output": 7.5e-06,
+          "cache_read_input_tokens": 7.5e-08
+        }
+      },
+      {
+        "name": "Priority",
+        "rules": [
+          {
+            "keys": [
+              "openai.response.service_tier",
+              "gen_ai.openai.response.service_tier",
+              "gen_ai.response.service_tier",
+              "openai.request.service_tier",
+              "gen_ai.openai.request.service_tier",
+              "gen_ai.request.service_tier",
+              "param.service_tier"
+            ],
+            "op": "in",
+            "values": [
+              "priority"
+            ]
+          }
+        ],
+        "prices": {
+          "input": 2.7e-06,
+          "output": 1.35e-05,
+          "cache_read_input_tokens": 1.35e-07
+        }
+      }
+    ]
+  },
+  {
     "name": "Gemini 4 Argon",
     "provider": "Google",
     "description": "Google Gemini 4 Argon - 1M context, implicit caching only. Introductory price through 2026-11-30; doubles to $4/$20 (cache $0.20) from 2026-12-01",
@@ -4736,15 +5313,15 @@
   {
     "name": "Mistral Large 4",
     "provider": "Mistral",
-    "description": "Mistral Large 4 (v26.10, public preview; ids mistral-large-4, mistral-large-4-0)",
-    "match_pattern": "(?i)mistral-large-4(?:$|-)",
+    "description": "Mistral Large 4 (ids mistral-large-4, mistral-large-4-0, mistral-large-latest)",
+    "match_pattern": "(?i)mistral-large-(?:4|latest)(?:$|-)",
     "tiers": [
       {
         "name": "Default",
         "prices": {
-          "input": 1.36e-06,
-          "output": 4.18e-06,
-          "cache_read_input_tokens": 1.4e-07
+          "input": 7e-07,
+          "output": 2.1e-06,
+          "cache_read_input_tokens": 7e-08
         }
       }
     ]
@@ -4752,8 +5329,8 @@
   {
     "name": "Mistral Large 3",
     "provider": "Mistral",
-    "description": "Mistral Large 3 (v25.12; ids mistral-large-2512, mistral-large-latest)",
-    "match_pattern": "(?i)mistral-large-(?:2512|3|latest)(?:$|-)",
+    "description": "Mistral Large 3 (v25.12; id mistral-large-2512). No longer on Mistral's pricing page; mistral-large-latest now points to Mistral Large 4",
+    "match_pattern": "(?i)mistral-large-(?:2512|3)(?:$|-)",
     "tiers": [
       {
         "name": "Default",
@@ -5229,6 +5806,23 @@
         "prices": {
           "input": 5e-07,
           "output": 1.5e-06
+        }
+      }
+    ]
+  },
+  {
+    "name": "Qwen4 Max",
+    "provider": "Alibaba",
+    "description": "Qwen4-Max (International, Singapore). Cache creation is the 5-minute rate (125% of input)",
+    "match_pattern": "(?i)qwen4-max(?:$|-\\d)",
+    "tiers": [
+      {
+        "name": "Default",
+        "prices": {
+          "input": 1.5e-06,
+          "output": 4.5e-06,
+          "cache_read_input_tokens": 7.5e-08,
+          "cache_creation_input_tokens": 1.875e-06
         }
       }
     ]
