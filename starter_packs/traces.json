@@ -1,0 +1,48 @@
+{
+  "id": "traces",
+  "version": "1.0.0",
+  "title": "Traces (APM)",
+  "description": "Request rate, errors and latency per service from OpenTelemetry traces.",
+  "collector_route": "ingestFromTraces",
+  "folder": {
+    "name": "Traces",
+    "description": "Installed by the Traces starter pack"
+  },
+  "detect": {
+    "streams": [
+      {
+        "type": "traces"
+      }
+    ]
+  },
+  "dashboards": [
+    {
+      "id": "apm",
+      "title": "Traces APM",
+      "summary": "Requests, errors and latency per service",
+      "gallery_path": "Traces_APM/Traces APM.dashboard.json"
+    }
+  ],
+  "alerts": {
+    "core": [
+      "apm/traces_service_error_rate_high",
+      "apm/traces_service_p95_latency_high",
+      "apm/traces_dependency_error_rate_high"
+    ],
+    "more": [
+      "apm/traces_operation_error_burst"
+    ]
+  },
+  "saved_views": [],
+  "paused_impact": "a service's error rate or latency climbs, or a dependency starts failing",
+  "alert_summaries": {
+    "apm/traces_service_error_rate_high": "Service errors above 5% of requests in 10 min",
+    "apm/traces_service_p95_latency_high": "Service p95 latency above 2 s in 10 min",
+    "apm/traces_dependency_error_rate_high": "Calls to a dependency fail over 10% in 10 min",
+    "apm/traces_operation_error_burst": "One endpoint hit 20+ errors (5%+) in 10 min"
+  },
+  "tile_summaries": {
+    "dashboards": "Requests, errors and latency per service",
+    "alerts": "Error rate, slow requests and failing dependencies"
+  }
+}

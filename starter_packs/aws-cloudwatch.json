@@ -1,0 +1,77 @@
+{
+  "id": "aws-cloudwatch",
+  "version": "1.0.0",
+  "title": "AWS CloudWatch",
+  "description": "EC2, RDS, load balancer, Lambda and SQS health from a CloudWatch metric stream.",
+  "logo": "images/ingestion/aws.svg",
+  "collector_route": "cloudwatchMetrics",
+  "folder": {
+    "name": "AWS CloudWatch",
+    "description": "Installed by the AWS CloudWatch starter pack"
+  },
+  "detect": {
+    "streams": [
+      {
+        "type": "logs",
+        "name": "cloudwatch_metrics"
+      }
+    ]
+  },
+  "dashboards": [
+    {
+      "id": "overview",
+      "title": "AWS CloudWatch Overview",
+      "summary": "EC2, RDS, ALB, Lambda and SQS health at a glance",
+      "gallery_path": "AWS_CloudWatch/AWS_CloudWatch_Overview.dashboard.json"
+    }
+  ],
+  "alerts": {
+    "core": [
+      "opentelemetry/aws_ec2_status_check_failed",
+      "opentelemetry/aws_ec2_high_cpu",
+      "opentelemetry/aws_rds_low_free_storage",
+      "opentelemetry/aws_alb_high_5xx_rate",
+      "opentelemetry/aws_lambda_high_error_rate_otel",
+      "opentelemetry/aws_sqs_old_messages"
+    ],
+    "more": [
+      "opentelemetry/aws_cloudwatch_metric_stream_stopped"
+    ]
+  },
+  "roles": [
+    {
+      "id": "metrics",
+      "title": "CloudWatch metrics",
+      "stream": "cloudwatch_metrics",
+      "fields": [
+        "namespace",
+        "metric_name",
+        "account_id",
+        "region",
+        "value_sum",
+        "value_count"
+      ],
+      "identity": [
+        {
+          "field": "namespace",
+          "pattern": "^AWS/"
+        }
+      ]
+    }
+  ],
+  "saved_views": [],
+  "paused_impact": "an AWS resource fails, fills up or starts erroring",
+  "alert_summaries": {
+    "opentelemetry/aws_ec2_status_check_failed": "EC2 instance failing its status checks",
+    "opentelemetry/aws_ec2_high_cpu": "EC2 CPU averaged above 80% over 20 minutes",
+    "opentelemetry/aws_rds_low_free_storage": "RDS free storage below 10 GiB",
+    "opentelemetry/aws_alb_high_5xx_rate": "Over 5% of load balancer requests return 5xx",
+    "opentelemetry/aws_lambda_high_error_rate_otel": "Lambda failing in over 5% of calls (15 min)",
+    "opentelemetry/aws_sqs_old_messages": "SQS message waiting over 15 min, consumers behind",
+    "opentelemetry/aws_cloudwatch_metric_stream_stopped": "No CloudWatch data for 30 min, alerts go blind"
+  },
+  "tile_summaries": {
+    "dashboards": "EC2, RDS, ALB, Lambda and SQS health at a glance",
+    "alerts": "EC2, RDS storage, ALB 5xx, Lambda, SQS, lost data"
+  }
+}

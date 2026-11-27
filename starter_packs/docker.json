@@ -1,0 +1,51 @@
+{
+  "id": "docker",
+  "version": "1.0.0",
+  "title": "Docker",
+  "description": "Container CPU, memory, network and disk from the OpenTelemetry Docker stats receiver.",
+  "logo": "images/common/docker.svg",
+  "folder": {
+    "name": "Docker",
+    "description": "Installed by the Docker starter pack"
+  },
+  "detect": {
+    "metric_names": [
+      [
+        "container_memory_percent"
+      ],
+      [
+        "container_cpu_usage_total"
+      ]
+    ]
+  },
+  "dashboards": [
+    {
+      "id": "containers",
+      "title": "Docker Container Metrics",
+      "summary": "CPU, memory, network and disk per container",
+      "gallery_path": "Docker_Metrics/Docker Container Metrics.dashboard.json"
+    }
+  ],
+  "alerts": {
+    "core": [
+      "opentelemetry/container_high_memory_usage_otel",
+      "opentelemetry/container_memory_near_limit_otel",
+      "opentelemetry/docker_stopped_reporting"
+    ],
+    "more": [
+      "opentelemetry/container_absent_otel"
+    ]
+  },
+  "saved_views": [],
+  "paused_impact": "a container runs out of memory or container metrics stop arriving",
+  "alert_summaries": {
+    "opentelemetry/container_high_memory_usage_otel": "Container above 90% of memory limit for 10 min",
+    "opentelemetry/container_memory_near_limit_otel": "Container above 95% of memory limit, near OOM",
+    "opentelemetry/docker_stopped_reporting": "Container metrics stopped arriving from all hosts",
+    "opentelemetry/container_absent_otel": "A container running 10 min ago is now gone"
+  },
+  "tile_summaries": {
+    "dashboards": "CPU, memory, network and disk per container",
+    "alerts": "Memory near limit, lost metrics, vanished containers"
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "id": "kubernetes",
+  "version": "1.1.0",
+  "title": "Kubernetes",
+  "description": "Dashboards, alerts and saved views for Kubernetes clusters.",
+  "paused_impact": "pods crash or run out of memory, or a deployment loses replicas",
+  "logo": "images/common/kubernetes.svg",
+  "collector_route": "ingestFromKubernetes",
+  "native_view": {
+    "feature": "kubernetes_monitoring",
+    "route": "infraKubernetes"
+  },
+  "cluster_scoped": true,
+  "folder": {
+    "name": "Kubernetes",
+    "description": "Installed by the Kubernetes starter pack"
+  },
+  "detect": {
+    "detector": "kubernetes"
+  },
+  "dashboards": [
+    {
+      "id": "overview",
+      "title": "Kubernetes Overview",
+      "summary": "Clusters, nodes, pods and workloads in one view",
+      "gallery_path": "Kubernetes(openobserve-collector)/kubernetes_overview.json",
+      "bundled": "kubernetes_overview"
+    }
+  ],
+  "alerts": {
+    "core": [
+      "k8s/pod_crashloop_backoff",
+      "k8s/pod_oom_killed",
+      "k8s/deployment_replica_mismatch",
+      "k8s/node_high_memory_usage",
+      "k8s/oom_killing_events"
+    ],
+    "more": [
+      "k8s/apiserver_high_latency",
+      "k8s/cluster_cpu_capacity_high",
+      "k8s/cluster_memory_capacity_high",
+      "k8s/cluster_pod_count_high"
+    ]
+  },
+  "bundled_alerts": "kubernetes",
+  "aliases": [
+    [
+      "k8s_cluster",
+      "k8s_cluster_name",
+      "cluster",
+      "cluster_name"
+    ],
+    [
+      "k8s_namespace_name",
+      "k8s_namespace",
+      "namespace",
+      "body_k8s_namespace_name",
+      "body_namespace"
+    ],
+    [
+      "k8s_pod_name",
+      "k8s_pod",
+      "pod",
+      "body_k8s_pod_name",
+      "body_pod"
+    ],
+    [
+      "k8s_node_name",
+      "k8s_node",
+      "node",
+      "body_k8s_node_name",
+      "body_node"
+    ],
+    [
+      "k8s_container_name",
+      "k8s_container",
+      "container",
+      "body_k8s_container_name",
+      "body_container"
+    ],
+    [
+      "kind",
+      "body_kind"
+    ],
+    [
+      "reason",
+      "body_reason"
+    ],
+    [
+      "message",
+      "body_message",
+      "body_note"
+    ]
+  ],
+  "alias_titles": {
+    "k8s_cluster": "Cluster name",
+    "k8s_namespace_name": "Namespace",
+    "k8s_pod_name": "Pod name",
+    "k8s_node_name": "Node name",
+    "k8s_container_name": "Container name",
+    "kind": "Event kind",
+    "reason": "Event reason",
+    "message": "Event message"
+  },
+  "roles": [
+    {
+      "id": "events",
+      "title": "Kubernetes events",
+      "stream": "k8s_events",
+      "fields": [
+        "kind",
+        "reason",
+        "message",
+        "k8s_namespace_name"
+      ],
+      "identity": [
+        {
+          "field": "instrumentation_library_name",
+          "pattern": "k8sobjects|k8s_events|k8sevents"
+        },
+        {
+          "field": "service_name",
+          "pattern": "k8s[-_]?events"
+        },
+        {
+          "field": "container_image_name",
+          "pattern": "event-exporter"
+        }
+      ]
+    }
+  ],
+  "flavours": [
+    {
+      "id": "opentelemetry",
+      "title": "OpenTelemetry",
+      "detect": [
+        "k8s_pod_phase",
+        "k8s_node_allocatable_cpu",
+        "k8s_container_cpu_request"
+      ],
+      "alerts": {
+        "k8s/cluster_cpu_capacity_high": {
+          "promql": "clamp_max(floor(sum by(k8s_cluster)(k8s_container_cpu_request) / on(k8s_cluster) sum by(k8s_cluster)(k8s_node_allocatable_cpu) * 10000) / 100, 100)",
+          "streams": [
+            "k8s_container_cpu_request",
+            "k8s_node_allocatable_cpu"
+          ]
+        },
+        "k8s/cluster_memory_capacity_high": {
+          "promql": "clamp_max(floor(sum by(k8s_cluster)(k8s_container_memory_request) / on(k8s_cluster) sum by(k8s_cluster)(k8s_node_allocatable_memory) * 10000) / 100, 100)",
+          "streams": [
+            "k8s_container_memory_request",
+            "k8s_node_allocatable_memory"
+          ]
+        },
+        "k8s/cluster_pod_count_high": {
+          "promql": "floor(count by(k8s_cluster) (k8s_pod_phase) / sum by(k8s_cluster) (k8s_node_allocatable_pods) * 10000) / 100",
+          "streams": [
+            "k8s_pod_phase",
+            "k8s_node_allocatable_pods"
+          ]
+        }
+      }
+    }
+  ],
+  "saved_views": [
+    {
+      "id": "events",
+      "name": "Kubernetes events",
+      "summary": "Every Kubernetes event in one searchable list",
+      "search": {
+        "meta": {},
+        "data": {
+          "stream": {
+            "streamType": "logs",
+            "selectedStream": [
+              "k8s_events"
+            ]
+          },
+          "query": ""
+        }
+      }
+    }
+  ],
+  "alert_summaries": {
+    "k8s/pod_crashloop_backoff": "Pods crash and restart over and over",
+    "k8s/pod_oom_killed": "Containers killed for running out of memory (OOM)",
+    "k8s/deployment_replica_mismatch": "Deployment below its desired pod count for 15m",
+    "k8s/node_high_memory_usage": "Node memory use at or above 80%",
+    "k8s/oom_killing_events": "Node is killing processes to free memory (OOM)",
+    "k8s/apiserver_high_latency": "API server p99 request time at 1 s or more",
+    "k8s/cluster_cpu_capacity_high": "Pod CPU requests use 80%+ of cluster capacity",
+    "k8s/cluster_memory_capacity_high": "Pod memory requests use 80%+ of cluster capacity",
+    "k8s/cluster_pod_count_high": "Cluster at 90%+ of the pods it can hold"
+  },
+  "tile_summaries": {
+    "dashboards": "Clusters, nodes, pods and workloads in one view",
+    "alerts": "Crash loops, OOM kills, node memory and cluster capacity",
+    "saved_views": "Every Kubernetes event in one searchable list"
+  }
+}
